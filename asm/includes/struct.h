@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:06:51 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 15:13:51 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 15:28:52 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
-#include <fcntl.h>
-
-char	*ft_skip_whitespace(char *str)
+typedef struct	s_instruct
 {
-	while ((*str >= 9 && *str <= 13) || *str == 32)
-		str++;
-	return (str);
-}
+	char				*name;
+	struct s_instruct	*next;
+}				t_instruct;
 
-void	ft_exit_error(char *str)
+typedef struct	s_label
 {
-	ft_printf("%s\n", str);
-	exit(0);
-}
+	char			*name;
+	t_instruct		*instructs;
+	struct s_label	*next;
+}				t_label;
 
-char	*ft_strjoin_free(char *s1, char *s2)
+typedef struct	s_asm
 {
-	char	*tmp;
-
-	tmp = ft_strjoin(s1, s2);
-	free(s1);
-	return (tmp);
-}
+	char	*name;
+	char	*comment;
+	t_label	*labels;
+}				t_asm;

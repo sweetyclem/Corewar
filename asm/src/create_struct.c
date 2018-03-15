@@ -1,47 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   asm.h                                              :+:      :+:    :+:   */
+/*   create_struct.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
+/*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
 /*   Updated: 2018/03/15 15:29:18 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ASM_H
-#define ASM_H
+#include "asm.h"
 
-#include "libft.h"
-#include "op.h"
-#include "struct.h"
+t_asm			*new_asm(void)
+{
+	t_asm	*asm;
 
-/*
-** Utils
-*/
-void	ft_exit_error(char *str);
-char	*ft_skip_whitespace(char *str);
-void	ft_exit_error(char *str);
+	if (!(asm = malloc(sizeof(asm))))
+		return (NULL);
+	asm->name = NULL;
+	asm->comment = NULL;
+	asm->labels = NULL;
+}
 
-/*
-** Parsing
-*/
-void	parse_file(char *content);
-void	parse_header(char *content);
+t_label			*new_label(void)
+{
+	t_label	*label;
 
-/*
-** Create Structures
-*/
-t_asm	*new_asm(void);
-t_label	*new_label(void);
-t_instr	*new_instruct(void);
+	if (!(label = malloc(sizeof(label))))
+		return (NULL);
+	label->name = NULL;
+	label->instructs = NULL;
+}
 
-/*
-** Free Structures
-*/
-void	free_asm(t_asm *asm);
-void	free_label(t_label *label);
-void	free_instruct(t_instruct *instruct);
+t_instruct	*new_instruct(void)
+{
+	t_instruct	*instruct;
 
-#endif
+	if (!(instruct = malloc(sizeof(instruct))))
+		return (NULL);
+	instruct->name = NULL;
+}
