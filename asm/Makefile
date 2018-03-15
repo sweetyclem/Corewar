@@ -6,7 +6,7 @@
 #    By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/13 09:03:03 by cpirlot          ###   ########.fr        #
+#    Updated: 2018/03/15 11:35:10 by cpirlot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	=  asm
 
 CC			= gcc
 FLAGS		= -Wall -Werror -Wextra -g
-SRC			= main.c
+SRC			= main.c parse.c
 OBJDIR		= obj
 OBJ	= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 VPATH:=includes/:${VPATH}
@@ -55,14 +55,14 @@ lib:
 clean:
 	@$(RM) -rf $(OBJDIR)
 	@make clean -C libft/
-	@echo "clean lem in: $(_CYAN)done$(_END)"
+	@echo "clean asm: $(_CYAN)done$(_END)"
 
 fclean: clean
 	@$(RM) -f $(NAME)
 	@$(RM) -f resources/players/$(NAME)
 	@$(RM) -f resources/$(NAME)
 	@make fclean -C libft/
-	@echo "fclean lem in: $(_CYAN)done$(_END)"
+	@echo "fclean asm: $(_CYAN)done$(_END)"
 
 re:
 	@make fclean

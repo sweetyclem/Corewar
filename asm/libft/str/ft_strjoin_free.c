@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:45:59 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 10:17:02 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 11:38:07 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "libft.h"
 
-int main(int ac, char **argv)
+char	*ft_strjoin_free(char *s1, char *s2)
 {
-	char *content;
+	char	*tmp;
 
-	if (ac != 2)
-		ft_exit_error("Usage : ./asm <file>");
-	content = ft_read_file(argv[1]);
-	if (!content)
-		ft_exit_error("Error: can't read file");
-	ft_printf("%s\n", content);
-	return (0);
+	tmp = ft_strjoin(s1, s2);
+	free(s1);
+	return (tmp);
 }

@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_read_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:45:59 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 11:45:14 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "libft.h"
+#include <fcntl.h>
 
-int main(int ac, char **argv)
+char	*ft_read_file(char *file_name)
 {
-	char *content;
+	int 	fd;
+	char	*content;
+	char	*buffer;
 
-	if (ac != 2)
-		ft_exit_error("Usage : ./asm <file>");
-	content = ft_read_file(argv[1]);
-	if (!content)
-		ft_exit_error("Error: can't read file");
-	ft_printf("%s\n", content);
-	return (0);
+	content = ft_strnew(1);
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	while (get_next_line(fd, &buffer) > 0)
+	{
+		content = ft_strjoin_free(content, buffer);
+		content = ft_strjoin_free(content, "\n");
+		free(buffer);
+	}
+	close(fd);
+	return (content);
 }
