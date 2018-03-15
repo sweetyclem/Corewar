@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apopinea <apopinea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 14:15:22 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/05 14:48:46 by apopinea         ###   ########.fr       */
+/*   Updated: 2018/03/15 15:03:01 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_open_file(char *s, int *len)
 	int			ret;
 
 	if (!s || !len)
-		return (ft_error_n(2, "RFLsn", FFL, "missing path or adresse for len"));
+		return (ft_error_n(2, "RFLsn", FFL, "missing path or adress for len"));
 	*len = 0;
 	errno = 0;
 	if (stat(s, &fstat) < 0)
