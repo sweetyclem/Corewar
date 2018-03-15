@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 13:29:01 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:42:52 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	parse_header(char *content)
 		while (content[i] && content[i] != '\n')
 			i++;
 	}
+	if (content[i] != '.')
+		ft_exit_error("Error: file must start with .name");
 	if (ft_strncmp(content, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
 	{
 		content = ft_strchr(content, '"');

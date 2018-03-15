@@ -4,3 +4,4 @@ obj/*
 asm/obj/*
 asm/libft/obj/*
 *.o
+asm/libft/libft.a
