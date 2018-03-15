@@ -1,16 +1,61 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/27 07:36:25 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 10:20:43 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 14:55:26 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "asm.h"
+#include <fcntl.h>
+
+char	*ft_skip_whitespace(char *str)
+{
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	return (str);
+}
+
+void	ft_exit_error(char *str)
+{
+	ft_printf("%s\n", str);
+	exit(0);
+}
+
+char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(s1, s2);
+	free(s1);
+	return (tmp);
+}
+
+char	*ft_read_file(char *file_name)
+{
+	int 	fd;
+	char	*content;
+	char	*buffer;
+
+	content = ft_strnew(1);
+	buffer = NULL;
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		return (NULL);
+	while (get_next_line(fd, &buffer) > 0)
+	{
+		content = ft_strjoin_free(content, buffer);
+		content = ft_strjoin_free(content, "\n");
+		free(buffer);
+	}
+	free(buffer);
+	close(fd);
+	return (content);
+}
 
 static char	*sub_to_n(char *str)
 {
