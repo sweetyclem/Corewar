@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:49:13 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:51:47 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void		ft_exit_error(char *str);
 /*
 ** Parsing
 */
-void		parse_file(char *content);
-void		parse_header(char *content);
+void		parse_file(char *content, t_env *env);
+void		parse_header(char *content, t_env *env);
 
 /*
 ** Create Structures
