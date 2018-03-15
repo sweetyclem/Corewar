@@ -6,25 +6,25 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:23:10 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:29:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:47:33 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	free_asm(t_asm *asm)
+void	free_env(t_env *env)
 {
-	if (asm)
+	if (env)
 	{
-		free(asm->name);
-		free(asm->comment);
-		while (asm->labels)
+		free(env->name);
+		free(env->comment);
+		while (env->labels)
 		{
-			free_label(asm->labels);
-			asm->labels = asm->labels->next;
+			free_label(env->labels);
+			env->labels = env->labels->next;
 		}
 	}
-	free(asm);
+	free(env);
 }
 
 void	free_label(t_label *label)

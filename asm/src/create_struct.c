@@ -6,21 +6,22 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:33:20 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:50:25 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_asm		*new_asm(void)
+t_env		*new_env(void)
 {
-	t_asm	*asm;
+	t_env	*env;
 
-	if (!(asm = malloc(sizeof(asm))))
+	if (!(env = malloc(sizeof(env))))
 		return (NULL);
-	asm->name = NULL;
-	asm->comment = NULL;
-	asm->labels = NULL;
+	env->name = NULL;
+	env->comment = NULL;
+	env->labels = NULL;
+	return (env);
 }
 
 t_label		*new_label(void)
@@ -31,6 +32,7 @@ t_label		*new_label(void)
 		return (NULL);
 	label->name = NULL;
 	label->instructs = NULL;
+	return (label);
 }
 
 t_instruct	*new_instruct(void)
@@ -40,4 +42,5 @@ t_instruct	*new_instruct(void)
 	if (!(instruct = malloc(sizeof(instruct))))
 		return (NULL);
 	instruct->name = NULL;
+	return (instruct);
 }

@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:13:51 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:36:29 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:46:09 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ typedef struct	s_label
 	struct s_label	*next;
 }				t_label;
 
-typedef struct	s_asm
+typedef struct	s_env
 {
 	char	*name;
 	char	*comment;
 	t_label	*labels;
-}				t_asm;
+}				t_env;
 
 #endif

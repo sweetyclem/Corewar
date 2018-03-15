@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:31:13 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:46:43 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@ int	main(int ac, char **argv)
 {
 	char	*content;
 	int		len;
-	t_asm	*asm;
+	t_env	*env;
 
 	if (ac != 2)
 		ft_exit_error("Usage : ./asm <file.s>");
 	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 2], ".s") != 0)
 		ft_exit_error("Error: file must be a .s");
-	asm = new_asm();
+	env = new_env();
 	content = ft_open_file(argv[1], &len);
 	if (!content)
 		ft_exit_error("Error: can't read file");
 	parse_file(content);
 	free(content);
-	free_asm(asm);
+	free_env(env);
 	return (0);
 }
