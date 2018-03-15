@@ -1,0 +1,24 @@
+{
+    "editor.insertSpaces": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+		"**/*.o": true,
+		"**/*.d": true
+      },
+    "editor.tabCompletion": true,
+	"files.trimTrailingWhitespace": true,
+	"42header.username": "apopinea",
+	"42header.email": "apopinea@student.42.fr",
+    "editor.detectIndentation": false,
+    "extensions.ignoreRecommendations": false,
+    "editor.minimap.enabled": false,
+    "selectline.displayFormat": "Selected %d Lines",
+    "selectline.alignment": "right",
+    "selectline.statusbarPriority": 1000,
+    "window.zoomLevel": 0,
+    "explorer.autoReveal": false
+}
