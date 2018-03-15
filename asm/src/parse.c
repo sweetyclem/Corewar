@@ -6,13 +6,31 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:41:36 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:29:01 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char	*parse_file(char *content)
+void	parse_file(char *content)
 {
-	return (content);
+	parse_header(content);
+}
+
+void	parse_header(char *content)
+{
+	int i;
+
+	i = 0;
+	content = ft_skip_whitespace(content);
+	if (content[i] == COMMENT_CHAR)
+	{
+		while (content[i] && content[i] != '\n')
+			i++;
+	}
+	if (ft_strncmp(content, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
+	{
+		content = ft_strchr(content, '"');
+		ft_printf("%s\n", content);
+	}
 }

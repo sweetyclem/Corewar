@@ -6,10 +6,12 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:38:29 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:29:16 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "op.h"
 
-char	*parse_file(char *content);
+void	parse_file(char *content);
+void	parse_header(char *content);

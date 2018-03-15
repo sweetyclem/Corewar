@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:45:59 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:35:37 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int main(int ac, char **argv)
 	content = ft_read_file(argv[1]);
 	if (!content)
 		ft_exit_error("Error: can't read file");
-	ft_printf("%s\n", content);
+	parse_file(content);
+	free(content);
 	return (0);
 }

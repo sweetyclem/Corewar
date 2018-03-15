@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 11:45:14 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 13:33:28 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ char	*ft_read_file(char *file_name)
 	char	*buffer;
 
 	content = ft_strnew(1);
+	buffer = NULL;
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
@@ -29,6 +30,7 @@ char	*ft_read_file(char *file_name)
 		content = ft_strjoin_free(content, "\n");
 		free(buffer);
 	}
+	free(buffer);
 	close(fd);
 	return (content);
 }

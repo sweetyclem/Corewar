@@ -1,0 +1,6 @@
+asm
+asm.dsYM*
+obj/*
+asm/obj/*
+asm/libft/obj/*
+*.o
