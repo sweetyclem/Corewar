@@ -6,16 +6,16 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:29:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:38:12 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
-#define ASM_H
+# define ASM_H
 
-#include "libft.h"
-#include "op.h"
-#include "struct.h"
+# include "libft.h"
+# include "op.h"
+# include "struct.h"
 
 /*
 ** Utils

@@ -6,13 +6,13 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:29:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:33:20 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_asm			*new_asm(void)
+t_asm		*new_asm(void)
 {
 	t_asm	*asm;
 
@@ -23,7 +23,7 @@ t_asm			*new_asm(void)
 	asm->labels = NULL;
 }
 
-t_label			*new_label(void)
+t_label		*new_label(void)
 {
 	t_label	*label;
 

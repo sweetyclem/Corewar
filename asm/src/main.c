@@ -6,21 +6,21 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:23:00 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:31:13 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int main(int ac, char **argv)
+int	main(int ac, char **argv)
 {
-	char 	*content;
+	char	*content;
 	int		len;
 	t_asm	*asm;
 
 	if (ac != 2)
 		ft_exit_error("Usage : ./asm <file.s>");
-	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) -2], ".s") != 0)
+	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 2], ".s") != 0)
 		ft_exit_error("Error: file must be a .s");
 	asm = new_asm();
 	content = ft_open_file(argv[1], &len);
@@ -28,6 +28,6 @@ int main(int ac, char **argv)
 		ft_exit_error("Error: can't read file");
 	parse_file(content);
 	free(content);
-	free_asm();
+	free_asm(asm);
 	return (0);
 }

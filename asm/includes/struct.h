@@ -6,9 +6,12 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:13:51 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:28:52 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/15 15:36:29 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef STRUCT_H
+# define STRUCT_H
 
 typedef struct	s_instruct
 {
@@ -29,3 +32,5 @@ typedef struct	s_asm
 	char	*comment;
 	t_label	*labels;
 }				t_asm;
+
+#endif
