@@ -32,3 +32,4 @@ lbe_maker/test/nohup.out
 */*/*/*/*/*/*/*/*.clbe
 lbe_maker/dbug_log.txt
 lbe_maker/error_log.txt
+asm/asm

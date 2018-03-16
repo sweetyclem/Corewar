@@ -28,7 +28,7 @@ void		ft_exit_error(char *str);
 ** Parsing
 */
 void		parse_file(char *content, t_env *env);
-void		parse_header(char *content, t_env *env);
+char		*parse_header(char *content, t_env *env);
 
 /*
 ** Create Structures

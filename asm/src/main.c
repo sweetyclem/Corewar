@@ -18,7 +18,7 @@ int	main(int ac, char **argv)
 	int		len;
 	t_env	*env;
 
-	if (ac != 2)
+	if (ac < 2)
 		ft_exit_error("Usage : ./asm <file.s>");
 	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 2], ".s") != 0)
 		ft_exit_error("Error: file must be a .s");

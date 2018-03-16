@@ -16,6 +16,7 @@
 # include <string.h>
 # include <stdarg.h>
 # include <inttypes.h>
+# include <wchar.h>
 
 # define BUFF_SIZE 1000
 

@@ -14,27 +14,41 @@
 
 void	parse_file(char *content, t_env *env)
 {
-	parse_header(content, env);
+	content = parse_header(content, env);
 }
 
-void	parse_header(char *content, t_env *env)
+char	*parse_header(char *content, t_env *env)
 {
-	int i;
+	int 	i;
+	char	*str;
 
 	i = 0;
-	content = ft_skip_whitespace(content);
-	if (content[i] == COMMENT_CHAR)
+	str = content;
+	str = ft_skip_whitespace(str);
+	if (str[i] == COMMENT_CHAR)
 	{
-		while (content[i] && content[i] != '\n')
+		while (str[i] && str[i] != '\n')
 			i++;
 	}
-	if (ft_strncmp(content, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
+	if (ft_strncmp(str, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
 	{
-		content = ft_strchr(content, '"') + 1;
+		str = ft_strchr(str, '"') + 1;
 		i = 0;
-		while (content[i] != '"')
+		while (str[i] != '"')
 			i++;
-		env->name = ft_strndup(content, i);
+		env->name = ft_strndup(str, i);
 		ft_printf("%s\n", env->name);
 	}
+	str = ft_strchr(str, '\n') + 1;
+	if (ft_strncmp(str, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
+	{
+		str = ft_strchr(str, '"') + 1;
+		i = 0;
+		while (str[i] != '"')
+			i++;
+		env->comment = ft_strndup(str, i);
+		ft_printf("%s\n", env->comment);
+	}
+	content = ft_strchr(str, '\n') + 1;
+	return (content);
 }
