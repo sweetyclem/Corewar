@@ -23,33 +23,32 @@ char	*get_name_or_comment(char **content, char *str)
 	int		i;
 
 	result = NULL;
+	i = 0;
+	while ((*content)[0] == COMMENT_CHAR  || (*content)[0] == '\n')
+		*content = ft_strchr(*content, '\n') + 1;
 	if (ft_strncmp(*content, str, ft_strlen(str)) == 0)
 	{
 		*content = ft_strchr(*content, '"') + 1;
-		i = 0;
-		while ((*content)[i] != '"')
+		while ((*content)[i] && (*content)[i] != '"')
 			i++;
 		result = ft_strndup(*content, i);
-		ft_printf("%s\n", result);
+		*content = ft_strchr(*content, '\n') + 1;
 	}
-	*content = ft_strchr(*content, '\n') + 1;
 	return (result);
 }
 
 char	*parse_header(char *content, t_env *env)
 {
-	int 	i;
-	char	*str;
-
-	i = 0;
-	str = content;
-	str = ft_skip_whitespace(str);
-	if (str[i] == COMMENT_CHAR)
-	{
-		while (str[i] && str[i] != '\n')
-			i++;
-	}
+	content = ft_skip_whitespace(content);
+	while (content[0] == COMMENT_CHAR || content[0] == '\n')
+		content = ft_strchr(content, '\n') + 1;
 	env->name = get_name_or_comment(&content, NAME_CMD_STRING);
-	env-> comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
+	env->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
+	if (ft_strncmp(content, ".extend", ft_strlen(".extend")) == 0)
+		env->extend = 1;
+	if (!env->name)
+		ft_exit_error("Program needs to have a name");
+	if (!env->comment)
+		env->comment = ft_strdup("");
 	return (content);
 }

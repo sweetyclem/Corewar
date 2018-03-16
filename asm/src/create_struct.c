@@ -16,11 +16,12 @@ t_env		*new_env(void)
 {
 	t_env	*env;
 
-	if (!(env = malloc(sizeof(env))))
+	if (!(env = malloc(sizeof(t_env))))
 		return (NULL);
 	env->name = NULL;
 	env->comment = NULL;
 	env->labels = NULL;
+	env->extend = 0;
 	return (env);
 }
 

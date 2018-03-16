@@ -30,6 +30,7 @@ typedef struct	s_env
 {
 	char	*name;
 	char	*comment;
+	int		extend;
 	t_label	*labels;
 }				t_env;
 

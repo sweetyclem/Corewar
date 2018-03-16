@@ -18,11 +18,15 @@ void	free_env(t_env *env)
 	{
 		free(env->name);
 		free(env->comment);
-		while (env->labels)
+		if (env->labels)
 		{
-			free_label(env->labels);
-			env->labels = env->labels->next;
+			while (env->labels)
+			{
+				free_label(env->labels);
+				env->labels = env->labels->next;
+			}
 		}
+		free(env->labels);
 	}
 	free(env);
 }
