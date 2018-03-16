@@ -17,6 +17,25 @@ void	parse_file(char *content, t_env *env)
 	content = parse_header(content, env);
 }
 
+char	*get_name_or_comment(char **content, char *str)
+{
+	char	*result;
+	int		i;
+
+	result = NULL;
+	if (ft_strncmp(*content, str, ft_strlen(str)) == 0)
+	{
+		*content = ft_strchr(*content, '"') + 1;
+		i = 0;
+		while ((*content)[i] != '"')
+			i++;
+		result = ft_strndup(*content, i);
+		ft_printf("%s\n", result);
+	}
+	*content = ft_strchr(*content, '\n') + 1;
+	return (result);
+}
+
 char	*parse_header(char *content, t_env *env)
 {
 	int 	i;
@@ -30,25 +49,7 @@ char	*parse_header(char *content, t_env *env)
 		while (str[i] && str[i] != '\n')
 			i++;
 	}
-	if (ft_strncmp(str, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)) == 0)
-	{
-		str = ft_strchr(str, '"') + 1;
-		i = 0;
-		while (str[i] != '"')
-			i++;
-		env->name = ft_strndup(str, i);
-		ft_printf("%s\n", env->name);
-	}
-	str = ft_strchr(str, '\n') + 1;
-	if (ft_strncmp(str, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)) == 0)
-	{
-		str = ft_strchr(str, '"') + 1;
-		i = 0;
-		while (str[i] != '"')
-			i++;
-		env->comment = ft_strndup(str, i);
-		ft_printf("%s\n", env->comment);
-	}
-	content = ft_strchr(str, '\n') + 1;
+	env->name = get_name_or_comment(&content, NAME_CMD_STRING);
+	env-> comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	return (content);
 }
