@@ -84,7 +84,10 @@ int	has_label(char *line)
 
 void	parse_body(char *content, t_env *env)
 {
-	if (has_label(content))
-		ft_printf("has label\n");
+	t_label	*label;
+
+	label = new_label();
+	if (!has_label(content))
+		label->name = NOLABEL;
 	env->labels = NULL;
 }
