@@ -17,6 +17,15 @@ void	parse_file(char *content, t_env *env)
 	content = parse_header(content, env);
 }
 
+char	*skip_comment_and_whitespace(char *content)
+{
+	content = ft_skip_whitespace(content);
+	while (content[0] == COMMENT_CHAR || content[0] == '\n')
+		content = ft_strchr(content, '\n') + 1;
+	content = ft_skip_whitespace(content);
+	return (content);
+}
+
 char	*get_name_or_comment(char **content, char *str)
 {
 	char	*result;
@@ -24,8 +33,7 @@ char	*get_name_or_comment(char **content, char *str)
 
 	result = NULL;
 	i = 0;
-	while ((*content)[0] == COMMENT_CHAR  || (*content)[0] == '\n')
-		*content = ft_strchr(*content, '\n') + 1;
+	*content = skip_comment_and_whitespace((*content));
 	if (ft_strncmp(*content, str, ft_strlen(str)) == 0)
 	{
 		*content = ft_strchr(*content, '"') + 1;
@@ -39,13 +47,13 @@ char	*get_name_or_comment(char **content, char *str)
 
 char	*parse_header(char *content, t_env *env)
 {
-	content = ft_skip_whitespace(content);
-	while (content[0] == COMMENT_CHAR || content[0] == '\n')
-		content = ft_strchr(content, '\n') + 1;
+	content = skip_comment_and_whitespace(content);
 	env->name = get_name_or_comment(&content, NAME_CMD_STRING);
 	env->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
+	content = skip_comment_and_whitespace(content);
 	if (ft_strncmp(content, ".extend", ft_strlen(".extend")) == 0)
 		env->extend = 1;
+	ft_printf("%s\n%s\n%d\n", env->name, env->comment, env->extend);
 	if (!env->name)
 		ft_exit_error("Program needs to have a name");
 	if (!env->comment)
