@@ -33,3 +33,4 @@ lbe_maker/test/nohup.out
 lbe_maker/dbug_log.txt
 lbe_maker/error_log.txt
 asm/asm
+asm/libft/libft.a
