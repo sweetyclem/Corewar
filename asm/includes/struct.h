@@ -20,7 +20,6 @@ typedef struct s_params {
 	char	*label;
 }				t_params;
 
-
 typedef struct	s_instruct
 {
 	char				*name;

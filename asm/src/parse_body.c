@@ -24,7 +24,6 @@ int	get_label_name(char *line, t_label *label)
 		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
 			label->name = ft_strndup(line, j);
-			ft_printf("label : %s\n", label->name);
 			return (1);
 		}
 		i++;
@@ -32,21 +31,26 @@ int	get_label_name(char *line, t_label *label)
 	return (0);
 }
 
-void	parse_body(char *content, t_champ *champ)
+void	get_instruct(t_champ *champ, char *line)
 {
 	t_label	*label;
+
+	label = new_label();
+	line = ft_strtrim_both(line);
+	get_label_name(line, label);
+	add_label_end(champ, label);
+	
+}
+
+void	parse_body(char *content, t_champ *champ)
+{
 	char	*line;
 
 	while (content)
 	{
-		label = new_label();
 		line = cut_first_line(content);
 		content = point_to_next_line(content);
-		if (!get_label_name(line, label))
-			label->name = ft_strdup(NOLABEL);
-		add_label_end(champ, label);
+		get_instruct(champ, line);
 		free(line);
-		if (!content)
-			break;
 	}
 }

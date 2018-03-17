@@ -60,6 +60,20 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
+typedef struct	s_op
+{
+	char	*name;
+	int		nb_params;
+	char	params_types[MAX_ARGS_NUMBER];
+	int		opcode;
+	int		nb_cycles;
+	char	*display_name;
+	int		param_byte;
+	int		has_index;
+}				t_op;
+
+extern t_op			op_tab;
+
 typedef struct		s_header
 {
 	unsigned int	magic;

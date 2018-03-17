@@ -16,7 +16,6 @@
 # include "libft.h"
 # include "op.h"
 # include "struct.h"
-# define NOLABEL	"NOLABEL"
 
 /*
 ** Parsing
