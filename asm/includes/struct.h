@@ -13,6 +13,8 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+# include "op.h"
+
 typedef struct s_params {
 	int		type;
 	int 	value;
@@ -24,7 +26,7 @@ typedef struct	s_instruct
 {
 	char				*name;
 	int					opcode;
-	t_params	 		params[3];
+	t_params	 		params[MAX_ARGS_NUMBER];
 	struct s_instruct	*next;
 }				t_instruct;
 

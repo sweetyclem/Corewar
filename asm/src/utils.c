@@ -28,6 +28,20 @@ char	*skip_comment_and_whitespace(char *content)
 	return (content);
 }
 
+char	*trim_comment(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == COMMENT_CHAR)
+			line[i] = '\0';
+		i++;
+	}
+	return (line);
+}
+
 void	ft_exit_error(char *str)
 {
 	ft_printf("%s\n", str);

@@ -41,11 +41,19 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct)
 void		free_instructs(t_instruct *instructs)
 {
 	t_instruct	*tmp_instruct;
+	int 		i;
 
 	while (instructs)
 	{
 		tmp_instruct = instructs;
 		instructs = instructs->next;
+		i = 0;
+		while (i < MAX_ARGS_NUMBER)
+		{
+			free(tmp_instruct->params[i].raw_value);
+			free(tmp_instruct->params[i].label);
+			i++;
+		}
 		free(tmp_instruct->name);
 		free(tmp_instruct);
 	}

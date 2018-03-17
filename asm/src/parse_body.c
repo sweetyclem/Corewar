@@ -35,6 +35,24 @@ char	*get_label_name(t_champ *champ, char *line)
 	return (line);
 }
 
+void	get_param(t_instruct *inst, char *line)
+{
+	char	**split;
+	int		i;
+
+	line = trim_comment(line);
+	split = ft_strsplit(line, SEPARATOR_CHAR);
+	i = 0;
+	while (split[i] && i < MAX_ARGS_NUMBER)
+	{
+		inst->params[i].raw_value = ft_strdup(ft_strtrim_both(split[i]));
+		free(split[i]);
+		ft_printf("param : %s\n", inst->params[i].raw_value);
+		i++;
+	}
+	free(split);
+}
+
 void	get_instruct(t_champ *champ, char *line)
 {
 	t_instruct	*instruct;
@@ -50,9 +68,10 @@ void	get_instruct(t_champ *champ, char *line)
 	{
 		instruct = new_instruct();
 		instruct->name = ft_strndup(line, i);
+		line = &line[i];
+		get_param(instruct, line);
 		add_instruct_end(champ, instruct);
 	}
-	line = &line[i];
 }
 
 void	parse_body(char *content, t_champ *champ)
@@ -65,17 +84,5 @@ void	parse_body(char *content, t_champ *champ)
 		content = point_to_next_line(content);
 		get_instruct(champ, line);
 		free(line);
-	}
-	t_label *label = champ->labels;
-	t_instruct *inst = champ->instructs;
-	while (inst)
-	{
-		ft_printf("instruction: %s\n", inst->name);
-		inst = inst->next;
-	}
-	while (label)
-	{
-		ft_printf("label: %s\n", label->name);
-		label = label->next;
 	}
 }

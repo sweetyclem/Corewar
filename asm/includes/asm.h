@@ -14,7 +14,6 @@
 # define ASM_H
 
 # include "libft.h"
-# include "op.h"
 # include "struct.h"
 
 /*
@@ -52,5 +51,6 @@ char		*ft_skip_whitespace(char *str);
 char		*point_to_next_line(char *str);
 char		*cut_first_line(char *str);
 char		*skip_comment_and_whitespace(char *content);
+char		*trim_comment(char *line);
 
 #endif
