@@ -28,6 +28,7 @@ char	*get_label_name(t_champ *champ, char *line)
 			label->name = ft_strndup(line, j);
 			add_label_end(champ, label);
 			line = line + j + 1;
+			break;
 		}
 		i++;
 	}
