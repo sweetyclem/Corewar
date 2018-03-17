@@ -19,15 +19,6 @@
 # define NOLABEL	"NOLABEL"
 
 /*
-** Utils
-*/
-void		ft_exit_error(char *str);
-char		*ft_skip_whitespace(char *str);
-void		ft_exit_error(char *str);
-char		*point_to_next_line(char *str);
-char		*cut_first_line(char *str);
-
-/*
 ** Parsing
 */
 void		parse_file(char *content, t_env *env);
@@ -53,5 +44,14 @@ void		free_instructs(t_instruct *instructs);
 */
 void		add_label_end(t_env *env, t_label *label);
 void		add_instruct_end(t_label *labt_label, t_instruct *instruct);
+
+/*
+** Utils
+*/
+void		ft_exit_error(char *str);
+char		*ft_skip_whitespace(char *str);
+char		*point_to_next_line(char *str);
+char		*cut_first_line(char *str);
+char		*skip_comment_and_whitespace(char *content);
 
 #endif

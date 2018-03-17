@@ -20,19 +20,18 @@ char	*ft_skip_whitespace(char *str)
 	return (str);
 }
 
+char	*skip_comment_and_whitespace(char *content)
+{
+	content = ft_strtrim_both(content);
+	while (content[0] == COMMENT_CHAR || content[0] == '\n')
+		content = point_to_next_line(content);
+	return (content);
+}
+
 void	ft_exit_error(char *str)
 {
 	ft_printf("%s\n", str);
 	exit(0);
-}
-
-char	*ft_strjoin_free(char *s1, char *s2)
-{
-	char	*tmp;
-
-	tmp = ft_strjoin(s1, s2);
-	free(s1);
-	return (tmp);
 }
 
 char	*cut_first_line(char *str)

@@ -12,14 +12,6 @@
 
 #include "asm.h"
 
-char	*skip_comment_and_whitespace(char *content)
-{
-	content = ft_strtrim_both(content);
-	while (content[0] == COMMENT_CHAR || content[0] == '\n')
-		content = point_to_next_line(content);
-	return (content);
-}
-
 void	parse_file(char *content, t_env *env)
 {
 	content = parse_header(content, env);
