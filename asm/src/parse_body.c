@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int	get_label_name(char *line, t_label *label)
+char	*get_label_name(char *line, t_label *label)
 {
 	int		i;
 	int		j;
@@ -24,22 +24,30 @@ int	get_label_name(char *line, t_label *label)
 		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
 			label->name = ft_strndup(line, j);
-			return (1);
+			line = line + j + 1;
 		}
 		i++;
 	}
-	return (0);
+	return (line);
 }
 
 void	get_instruct(t_champ *champ, char *line)
 {
-	t_label	*label;
+	t_label		*label;
+	t_instruct	*instruct;
+	int			i;
 
 	label = new_label();
+	instruct = new_instruct();
+	i = 0;
 	line = ft_strtrim_both(line);
-	get_label_name(line, label);
+	line = get_label_name(line, label);
 	add_label_end(champ, label);
-	
+	line = ft_skip_whitespace(line);
+	while (line[i] != ' ' && line[i] != '\t')
+		i++;
+	instruct->name = ft_strndup(line, i);
+	ft_printf("instruction: %s\n", instruct->name);
 }
 
 void	parse_body(char *content, t_champ *champ)
