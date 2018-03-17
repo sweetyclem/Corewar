@@ -16,7 +16,7 @@ char	*skip_comment_and_whitespace(char *content)
 {
 	content = ft_skip_whitespace(content);
 	while (content[0] == COMMENT_CHAR || content[0] == '\n')
-		content = ft_strchr(content, '\n') + 1;
+		content = point_to_next_line(content);
 	content = ft_skip_whitespace(content);
 	return (content);
 }
@@ -43,7 +43,7 @@ char	*get_name_or_comment(char **content, char *str)
 		while ((*content)[i] && (*content)[i] != '"')
 			i++;
 		result = ft_strndup(*content, i);
-		*content = ft_strchr(*content, '\n') + 1;
+		*content = point_to_next_line(*content);
 	}
 	return (result);
 }
@@ -57,7 +57,7 @@ char	*parse_header(char *content, t_env *env)
 	if (ft_strncmp(content, ".extend", ft_strlen(".extend")) == 0)
 	{
 		env->extend = 1;
-		content = ft_strchr(content, '\n') + 1;
+		content = point_to_next_line(content);
 	}
 	if (!env->name)
 		ft_exit_error("Program needs to have a name");
@@ -94,12 +94,13 @@ void	parse_body(char *content, t_env *env)
 	while (content)
 	{
 		label = new_label();
-		line = ft_strscut(&content, "\n", 6);
+		line = cut_first_line(content);
+		content = point_to_next_line(content);
 		if (!get_label_name(line, label))
 			label->name = ft_strdup(NOLABEL);
 		add_label_end(env, label);
 		free(line);
-		if (content[0] == '\0')
+		if (!content)
 			break;
 	}
 }

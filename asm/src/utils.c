@@ -34,3 +34,26 @@ char	*ft_strjoin_free(char *s1, char *s2)
 	free(s1);
 	return (tmp);
 }
+
+char	*cut_first_line(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+		i++;
+	str = ft_strsub(str, 0, i);
+	return (str);
+}
+
+char	*point_to_next_line(char *str)
+{
+	char	*next;
+
+	next = ft_strchr(str, '\n');
+	if (next && next + 1)
+		str = next + 1;
+	else
+		str = '\0';
+	return (str);
+}

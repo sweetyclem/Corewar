@@ -24,6 +24,8 @@
 void		ft_exit_error(char *str);
 char		*ft_skip_whitespace(char *str);
 void		ft_exit_error(char *str);
+char		*point_to_next_line(char *str);
+char		*cut_first_line(char *str);
 
 /*
 ** Parsing
