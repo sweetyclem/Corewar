@@ -389,7 +389,7 @@ SRCS += $(addprefix $(DIR_S_UTILITIES), $(SRCS_UTILITIES))
 SROS = $(SRCS:.c=.o)
 SRDS = $(SRCS:.c=.d)
 
-FLAG = -Wall -Werror -Wextra -MMD
+FLAG = -Wall -Werror -Wextra -MMD -g
 CC = gcc
 
 all: $(NAME)

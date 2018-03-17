@@ -18,38 +18,36 @@ void	free_env(t_env *env)
 	{
 		free(env->name);
 		free(env->comment);
-		if (env->labels)
-		{
-			while (env->labels)
-			{
-				free_label(env->labels);
-				env->labels = env->labels->next;
-			}
-		}
-		free(env->labels);
+		free_labels(env->labels);
 	}
 	free(env);
 }
 
-void	free_label(t_label *label)
+void	free_labels(t_label *labels)
 {
-	if (label)
+	t_label	*tmp_label;
+
+	while (labels)
 	{
-		free(label->name);
-		while (label->instructs)
-		{
-			free_instruct(label->instructs);
-			label->instructs = label->instructs->next;
-		}
+		tmp_label = labels;
+		labels = (labels)->next;
+		free(tmp_label->name);
+		free_instructs(tmp_label->instructs);
+		free(tmp_label);
 	}
-	free(label);
+	free(labels);
 }
 
-void	free_instruct(t_instruct *instruct)
+void	free_instructs(t_instruct *instructs)
 {
-	if (instruct)
+	t_instruct	*tmp_instruct;
+
+	while (instructs)
 	{
-		free(instruct->name);
+		tmp_instruct = instructs;
+		instructs = (instructs)->next;
+		free(tmp_instruct->name);
+		free(tmp_instruct);
 	}
-	free(instruct);
+	free(instructs);
 }

@@ -43,7 +43,13 @@ t_instruct	*new_instruct(void);
 ** Free Structures
 */
 void		free_env(t_env *env);
-void		free_label(t_label *label);
-void		free_instruct(t_instruct *instruct);
+void		free_labels(t_label *labels);
+void		free_instructs(t_instruct *instructs);
+
+/*
+** Add at the end of linked list
+*/
+void		add_label_end(t_env *env, t_label *label);
+void		add_instruct_end(t_label *labt_label, t_instruct *instruct);
 
 #endif

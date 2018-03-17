@@ -66,17 +66,21 @@ char	*parse_header(char *content, t_env *env)
 	return (content);
 }
 
-int	has_label(char *line)
+int	get_label_name(char *line, t_label *label)
 {
-	char 	*str;
 	int		i;
+	int		j;
 
-	str = ft_strchr(line, LABEL_CHAR);
 	i = 0;
-	while (str[i] && str[i] != '\n')
+	j = ft_strchr_i(line, LABEL_CHAR);
+	while (line[i] && line[i] != COMMENT_CHAR)
 	{
-		if (str[-1] && ft_strchr(LABEL_CHARS, str[-1]))
+		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
+		{
+			label->name = ft_strndup(line, j);
+			ft_printf("label : %s\n", label->name);
 			return (1);
+		}
 		i++;
 	}
 	return (0);
@@ -85,9 +89,17 @@ int	has_label(char *line)
 void	parse_body(char *content, t_env *env)
 {
 	t_label	*label;
+	char	*line;
 
-	label = new_label();
-	if (!has_label(content))
-		label->name = NOLABEL;
-	env->labels = NULL;
+	while (content)
+	{
+		label = new_label();
+		line = ft_strscut(&content, "\n", 6);
+		if (!get_label_name(line, label))
+			label->name = ft_strdup(NOLABEL);
+		add_label_end(env, label);
+		free(line);
+		if (content[0] == '\0')
+			break;
+	}
 }
