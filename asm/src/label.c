@@ -1,26 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_struct.c                                      :+:      :+:    :+:   */
+/*   label.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 15:23:10 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:47:33 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 15:50:25 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	free_env(t_env *env)
+t_label	*new_label(void)
 {
-	if (env)
+	t_label	*label;
+
+	if (!(label = malloc(sizeof(t_label))))
+		return (NULL);
+	ft_memset(label, 0, sizeof(*label));
+	return (label);
+}
+
+void	add_label_end(t_champ *champ, t_label *label)
+{
+	t_label	*tmp;
+
+	if (champ->labels == NULL)
 	{
-		free(env->name);
-		free(env->comment);
-		free_labels(env->labels);
+		champ->labels = label;
+		return ;
 	}
-	free(env);
+	tmp = champ->labels;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = label;
+	label->next = NULL;
 }
 
 void	free_labels(t_label *labels)
@@ -32,22 +47,7 @@ void	free_labels(t_label *labels)
 		tmp_label = labels;
 		labels = (labels)->next;
 		free(tmp_label->name);
-		free_instructs(tmp_label->instructs);
 		free(tmp_label);
 	}
 	free(labels);
-}
-
-void	free_instructs(t_instruct *instructs)
-{
-	t_instruct	*tmp_instruct;
-
-	while (instructs)
-	{
-		tmp_instruct = instructs;
-		instructs = (instructs)->next;
-		free(tmp_instruct->name);
-		free(tmp_instruct);
-	}
-	free(instructs);
 }

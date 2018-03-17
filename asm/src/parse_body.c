@@ -32,7 +32,7 @@ int	get_label_name(char *line, t_label *label)
 	return (0);
 }
 
-void	parse_body(char *content, t_env *env)
+void	parse_body(char *content, t_champ *champ)
 {
 	t_label	*label;
 	char	*line;
@@ -44,7 +44,7 @@ void	parse_body(char *content, t_env *env)
 		content = point_to_next_line(content);
 		if (!get_label_name(line, label))
 			label->name = ft_strdup(NOLABEL);
-		add_label_end(env, label);
+		add_label_end(champ, label);
 		free(line);
 		if (!content)
 			break;

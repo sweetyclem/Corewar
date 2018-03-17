@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   champ.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:51:08 by cpirlot          ###   ########.fr       */
+/*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
+/*   Updated: 2018/03/15 15:50:25 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int	main(int ac, char **argv)
+t_champ	*new_champ(void)
 {
-	char	*content;
-	int		len;
 	t_champ	*champ;
 
-	if (ac != 2)
-		ft_exit_error("Usage : ./asm <file.s>");
-	if (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 2], ".s") != 0)
-		ft_exit_error("Error: file must be a .s");
-	champ = new_champ();
-	content = ft_open_file(argv[1], &len);
-	if (!content)
-		ft_exit_error("Error: can't read file");
-	parse_file(content, champ);
-	free(content);
-	free_champ(champ);
-	return (0);
+	if (!(champ = malloc(sizeof(t_champ))))
+		return (NULL);
+	ft_memset(champ, 0, sizeof(*champ));
+	return (champ);
+}
+
+void	free_champ(t_champ *champ)
+{
+	if (champ)
+	{
+		free(champ->name);
+		free(champ->comment);
+		free_labels(champ->labels);
+		free_instructs(champ->instructs);
+	}
+	free(champ);
 }

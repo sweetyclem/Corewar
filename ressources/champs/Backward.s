@@ -2,8 +2,8 @@
 .comment "sebc"
 .extend
 
-	st	r1, :l1+1
-	ld	%4, r3
+	st	r1, :l1+1          # 1 + 2 + 2 + 2 = 7
+	ld	%4, r3             # 1 + 2 + 4 + 2  = 9
 l1:	live	%1
 	ld	%:l1 - :l2, r2
 l3:	ldi	%:l2, r2, r4

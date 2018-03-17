@@ -21,29 +21,29 @@
 /*
 ** Parsing
 */
-void		parse_file(char *content, t_env *env);
-char		*parse_header(char *content, t_env *env);
-void		parse_body(char *content, t_env *env);
+void		parse_file(char *content, t_champ *champ);
+char		*parse_header(char *content, t_champ *champ);
+void		parse_body(char *content, t_champ *champ);
 
 /*
 ** Create Structures
 */
-t_env		*new_env(void);
+t_champ		*new_champ(void);
 t_label		*new_label(void);
 t_instruct	*new_instruct(void);
 
 /*
 ** Free Structures
 */
-void		free_env(t_env *env);
+void		free_champ(t_champ *champ);
 void		free_labels(t_label *labels);
 void		free_instructs(t_instruct *instructs);
 
 /*
 ** Add at the end of linked list
 */
-void		add_label_end(t_env *env, t_label *label);
-void		add_instruct_end(t_label *labt_label, t_instruct *instruct);
+void		add_label_end(t_champ *champ, t_label *label);
+void		add_instruct_end(t_champ *labt_champ, t_instruct *instruct);
 
 /*
 ** Utils

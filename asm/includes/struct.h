@@ -13,25 +13,36 @@
 #ifndef STRUCT_H
 # define STRUCT_H
 
+typedef struct s_params {
+	int		type;
+	int 	value;
+	char	*raw_value;
+	char	*label;
+}				t_params;
+
+
 typedef struct	s_instruct
 {
 	char				*name;
+	int					opcode;
+	t_params	 		params[3];
 	struct s_instruct	*next;
 }				t_instruct;
 
 typedef struct	s_label
 {
 	char			*name;
-	t_instruct		*instructs;
+	int				address;
 	struct s_label	*next;
 }				t_label;
 
-typedef struct	s_env
+typedef struct	s_champ
 {
-	char	*name;
-	char	*comment;
-	int		extend;
-	t_label	*labels;
-}				t_env;
+	char		*name;
+	char		*comment;
+	int			extend;
+	t_label		*labels;
+	t_instruct	*instructs;
+}				t_champ;
 
 #endif

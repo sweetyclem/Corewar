@@ -12,12 +12,12 @@
 
 #include "asm.h"
 
-void	parse_file(char *content, t_env *env)
+void	parse_file(char *content, t_champ *champ)
 {
-	content = parse_header(content, env);
+	content = parse_header(content, champ);
 	content = skip_comment_and_whitespace(content);
-	ft_printf("name : %s\ncomment : %s\nextend : %d\n", env->name, env->comment, env->extend);
-	parse_body(content, env);
+	ft_printf("name : %s\ncomment : %s\nextend : %d\n", champ->name, champ->comment, champ->extend);
+	parse_body(content, champ);
 }
 
 char	*get_name_or_comment(char **content, char *str)
@@ -39,20 +39,20 @@ char	*get_name_or_comment(char **content, char *str)
 	return (result);
 }
 
-char	*parse_header(char *content, t_env *env)
+char	*parse_header(char *content, t_champ *champ)
 {
 	content = skip_comment_and_whitespace(content);
-	env->name = get_name_or_comment(&content, NAME_CMD_STRING);
-	env->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
+	champ->name = get_name_or_comment(&content, NAME_CMD_STRING);
+	champ->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	content = skip_comment_and_whitespace(content);
 	if (ft_strncmp(content, ".extend", ft_strlen(".extend")) == 0)
 	{
-		env->extend = 1;
+		champ->extend = 1;
 		content = point_to_next_line(content);
 	}
-	if (!env->name)
+	if (!champ->name)
 		ft_exit_error("Program needs to have a name");
-	if (!env->comment)
-		env->comment = ft_strdup("");
+	if (!champ->comment)
+		champ->comment = ft_strdup("");
 	return (content);
 }
