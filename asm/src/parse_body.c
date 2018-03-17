@@ -44,10 +44,13 @@ void	get_instruct(t_champ *champ, char *line)
 	line = get_label_name(line, label);
 	add_label_end(champ, label);
 	line = ft_skip_whitespace(line);
-	while (line[i] != ' ' && line[i] != '\t')
+	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
-	instruct->name = ft_strndup(line, i);
-	ft_printf("instruction: %s\n", instruct->name);
+	if (line[i] != '\0' && line[i] != '\n')
+	{
+		instruct->name = ft_strndup(line, i);
+		add_instruct_end(champ, instruct);
+	}
 }
 
 void	parse_body(char *content, t_champ *champ)
@@ -59,6 +62,11 @@ void	parse_body(char *content, t_champ *champ)
 		line = cut_first_line(content);
 		content = point_to_next_line(content);
 		get_instruct(champ, line);
+		while (champ->instructs)
+		{
+			ft_printf("instruction: %s\n", champ->instructs->name);
+			champ->instructs = champ->instructs->next;
+		}
 		free(line);
 	}
 }
