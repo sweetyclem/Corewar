@@ -12,18 +12,21 @@
 
 #include "asm.h"
 
-char	*get_label_name(char *line, t_label *label)
+char	*get_label_name(t_champ *champ, char *line)
 {
 	int		i;
 	int		j;
+	t_label	*label;
 
 	i = 0;
 	j = ft_strchr_i(line, LABEL_CHAR);
+	label = new_label();
 	while (line[i] && line[i] != COMMENT_CHAR)
 	{
 		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
 			label->name = ft_strndup(line, j);
+			add_label_end(champ, label);
 			line = line + j + 1;
 		}
 		i++;
@@ -33,16 +36,13 @@ char	*get_label_name(char *line, t_label *label)
 
 void	get_instruct(t_champ *champ, char *line)
 {
-	t_label		*label;
 	t_instruct	*instruct;
 	int			i;
 
-	label = new_label();
 	instruct = new_instruct();
 	i = 0;
 	line = ft_strtrim_both(line);
-	line = get_label_name(line, label);
-	add_label_end(champ, label);
+	line = get_label_name(champ, line);
 	line = ft_skip_whitespace(line);
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
@@ -51,6 +51,7 @@ void	get_instruct(t_champ *champ, char *line)
 		instruct->name = ft_strndup(line, i);
 		add_instruct_end(champ, instruct);
 	}
+	line = &line[i];
 }
 
 void	parse_body(char *content, t_champ *champ)
@@ -66,6 +67,11 @@ void	parse_body(char *content, t_champ *champ)
 		{
 			ft_printf("instruction: %s\n", champ->instructs->name);
 			champ->instructs = champ->instructs->next;
+		}
+		while (champ->labels)
+		{
+			ft_printf("label: %s\n", champ->labels->name);
+			champ->labels = champ->labels->next;
 		}
 		free(line);
 	}
