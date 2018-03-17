@@ -45,7 +45,7 @@ void	free_labels(t_label *labels)
 	while (labels)
 	{
 		tmp_label = labels;
-		labels = (labels)->next;
+		labels = labels->next;
 		free(tmp_label->name);
 		free(tmp_label);
 	}

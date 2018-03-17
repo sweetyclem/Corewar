@@ -24,12 +24,9 @@ t_champ	*new_champ(void)
 
 void	free_champ(t_champ *champ)
 {
-	if (champ)
-	{
-		free(champ->name);
-		free(champ->comment);
-		free_labels(champ->labels);
-		free_instructs(champ->instructs);
-	}
+	free(champ->name);
+	free(champ->comment);
+	free_labels(champ->labels);
+	free_instructs(champ->instructs);
 	free(champ);
 }

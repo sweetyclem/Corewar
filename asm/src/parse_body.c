@@ -20,11 +20,11 @@ char	*get_label_name(t_champ *champ, char *line)
 
 	i = 0;
 	j = ft_strchr_i(line, LABEL_CHAR);
-	label = new_label();
 	while (line[i] && line[i] != COMMENT_CHAR)
 	{
 		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
+			label = new_label();
 			label->name = ft_strndup(line, j);
 			add_label_end(champ, label);
 			line = line + j + 1;
@@ -39,7 +39,6 @@ void	get_instruct(t_champ *champ, char *line)
 	t_instruct	*instruct;
 	int			i;
 
-	instruct = new_instruct();
 	i = 0;
 	line = ft_strtrim_both(line);
 	line = get_label_name(champ, line);
@@ -48,6 +47,7 @@ void	get_instruct(t_champ *champ, char *line)
 		i++;
 	if (line[i] != '\0' && line[i] != '\n')
 	{
+		instruct = new_instruct();
 		instruct->name = ft_strndup(line, i);
 		add_instruct_end(champ, instruct);
 	}
@@ -63,16 +63,18 @@ void	parse_body(char *content, t_champ *champ)
 		line = cut_first_line(content);
 		content = point_to_next_line(content);
 		get_instruct(champ, line);
-		while (champ->instructs)
-		{
-			ft_printf("instruction: %s\n", champ->instructs->name);
-			champ->instructs = champ->instructs->next;
-		}
-		while (champ->labels)
-		{
-			ft_printf("label: %s\n", champ->labels->name);
-			champ->labels = champ->labels->next;
-		}
 		free(line);
+	}
+	t_label *label = champ->labels;
+	t_instruct *inst = champ->instructs;
+	while (inst)
+	{
+		ft_printf("instruction: %s\n", inst->name);
+		inst = inst->next;
+	}
+	while (label)
+	{
+		ft_printf("label: %s\n", label->name);
+		label = label->next;
 	}
 }

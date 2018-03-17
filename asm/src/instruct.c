@@ -45,7 +45,7 @@ void		free_instructs(t_instruct *instructs)
 	while (instructs)
 	{
 		tmp_instruct = instructs;
-		instructs = (instructs)->next;
+		instructs = instructs->next;
 		free(tmp_instruct->name);
 		free(tmp_instruct);
 	}
