@@ -14,7 +14,7 @@ NAME	=  asm
 
 CC			= gcc
 FLAGS		= -Wall -Werror -Wextra -g
-SRC			= main.c parse.c utils.c create_struct.c free_struct.c
+SRC			= main.c parse_header.c parse_body.c utils.c create_struct.c free_struct.c
 OBJDIR		= obj
 OBJ	= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 VPATH:=src/:${VPATH}
