@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 14:12:52 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/19 20:58:00 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@
 # include "libft.h"
 # include "struct.h"
 
+typedef void	(*t_tab_instr)(t_instruct*,char*,int*);
 /*
 ** Parsing
 */
 void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
+int			get_param(t_instruct *inst, char *line);
+void		calc_param_value(t_param *param, t_label *labels, int inst_addr);
+int			get_label_addr(t_label *labels, char *name);
 
 /*
 ** Compiling
 */
-
-char compile(t_champ *champ, char *path);
+char		compile(t_champ *champ, char *path);
 
 /*
 ** Create Structures
@@ -47,7 +50,7 @@ void		free_instructs(t_instruct *instructs);
 ** Add at the end of linked list
 */
 void		add_label_end(t_champ *champ, t_label *label);
-void		add_instruct_end(t_champ *labt_champ, t_instruct *instruct);
+void		add_instruct_end(t_champ *t_champ, t_instruct *instruct);
 
 /*
 ** Utils
@@ -58,5 +61,6 @@ char		*point_to_next_line(char *str);
 char		*cut_first_line(char *str);
 char		*skip_comment_and_whitespace(char *content);
 char		*trim_comment(char *line);
+int			find_op(char *name);
 
 #endif

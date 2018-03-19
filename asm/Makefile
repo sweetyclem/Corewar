@@ -6,7 +6,7 @@
 #    By: trichert <trichert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/19 14:12:01 by trichert         ###   ########.fr        #
+#    Updated: 2018/03/19 18:07:49 by trichert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,10 @@ SRC			= champ.c 		\
 			instruct.c		\
  			label.c			\
 			main.c			\
+			op.c			\
 			parse_body.c	\
 			parse_header.c	\
+			parse_params.c  \
 			utils.c
 
 OBJDIR		= obj

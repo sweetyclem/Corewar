@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 09:10:42 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:55:03 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void		free_instructs(t_instruct *instructs)
 		while (i < MAX_ARGS_NUMBER)
 		{
 			free(tmp_instruct->params[i].raw_value);
-			free(tmp_instruct->params[i].label);
 			i++;
 		}
 		free(tmp_instruct->name);

@@ -6,14 +6,20 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:43:01 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/19 09:11:07 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:30:48 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "op.h"
+#include "asm.h"
 
-static t_op	g_op_tab[17] =
+/*
+** char	*name, int nb_params, char	params_types[MAX_ARGS_NUMBER], int opcode,
+** int nb_cycles, char *display_name, int has_opc, int dir_two_bytes
+*/
+
+t_op	g_op_tab[17] =
 {
+	{0, 0, {0}, 0, 0, 0, 0, 0},
 	{"live", 1, {T_DIR}, 1, 10, "alive", 0, 0},
 	{"ld", 2, {T_DIR | T_IND, T_REG}, 2, 5, "load", 1, 0},
 	{"st", 2, {T_REG, T_IND | T_REG}, 3, 5, "store", 1, 0},
@@ -35,6 +41,19 @@ static t_op	g_op_tab[17] =
 	{"lldi", 3, {T_REG | T_DIR | T_IND, T_DIR | T_REG, T_REG}, 14, 50,
 		"long load index", 1, 1},
 	{"lfork", 1, {T_DIR}, 15, 1000, "long fork", 0, 1},
-	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0},
-	{0, 0, {0}, 0, 0, 0, 0, 0}
+	{"aff", 1, {T_REG}, 16, 2, "aff", 1, 0}
 };
+
+int		find_op(char *name)
+{
+	int i;
+
+	i = 0;
+	while (i < 17)
+	{
+		if (ft_strcmp(g_op_tab[i].name, name) == 0)
+			return (i);
+		i++;
+	}
+	return (0);
+}

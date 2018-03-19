@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:13:51 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 09:10:24 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:46:57 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 # define STRUCT_H
 # include "op.h"
 
-typedef struct	s_params {
+typedef struct	s_param {
 	int		type;
 	int		value;
 	char	*raw_value;
-	char	*label;
-}				t_params;
+	int		nb_bytes;
+}				t_param;
 
 typedef struct	s_instruct
 {
 	char				*name;
 	int					opcode;
-	t_params			params[MAX_ARGS_NUMBER];
+	int					address;
+	t_param				params[MAX_ARGS_NUMBER];
 	struct s_instruct	*next;
 }				t_instruct;
 
