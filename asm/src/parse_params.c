@@ -6,13 +6,20 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 13:08:51 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:47:45 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void	get_param_type(t_params	*param)
+void	get_param_value(t_instruct *inst)
+{
+	t_param	*param;
+
+	param = ins->params;
+}
+
+void	get_param_type(t_param	*param)
 {
 	if (param->raw_value && param->raw_value[0] == 'r')
 		param->type = T_REG;
@@ -24,7 +31,7 @@ void	get_param_type(t_params	*param)
 
 int		get_nb_bytes(t_instruct *instruct)
 {
-	t_params	*params;
+	t_param	*params;
 	int			i;
 	int			op;
 	int			nb_bytes;
@@ -68,7 +75,6 @@ int		get_param(t_instruct *inst, char *line)
 		free(split[i]);
 		get_param_type(&inst->params[i]);
 		nb_bytes = get_nb_bytes(inst);
-		ft_printf("param bytes : %d\n", inst->params[i].nb_bytes);
 		i++;
 	}
 	free(split);

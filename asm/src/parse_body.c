@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 13:32:44 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:44:01 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 		line = &line[i];
 		instruct->address = nb_bytes;
 		nb_bytes += 1 + g_op_tab[op].has_opc + get_param(instruct, line);
-		ft_printf("nb bytes : %d\n", nb_bytes);
 		add_instruct_end(champ, instruct);
 	}
 	return (nb_bytes);
