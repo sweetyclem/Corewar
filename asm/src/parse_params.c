@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 16:56:57 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 17:00:48 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int		calc_label(t_param *param, t_label *labels, int inst_addr)
 
 	res = 0;
 	label = label_in_value(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
+	if (get_label_addr(labels, label) == -1)
+		ft_exit_error("Error: param points to non existent address")
 	if (inst_addr > get_label_addr(labels, label))
 		res = get_label_addr(labels, label) - inst_addr + 1;
 	else
