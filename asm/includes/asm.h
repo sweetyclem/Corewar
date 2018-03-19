@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:51:47 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 14:12:52 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
+
+/*
+** Compiling
+*/
+
+char compile(t_champ *champ, char *path);
 
 /*
 ** Create Structures

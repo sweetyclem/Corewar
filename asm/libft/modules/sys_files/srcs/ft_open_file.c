@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_open_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 14:15:22 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/15 15:03:01 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 14:19:56 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_open_file(char *s, int *len)
 **		creates a new open file description
 */
 
-int		ft_create_file(char *p, int *size)
+int		ft_create_file(char *p)
 {
 	struct stat	fstat;
 	int			ret;
@@ -94,8 +94,7 @@ int		ft_create_file(char *p, int *size)
 	else if (ret == 0 && fstat.st_size == 0)
 	{
 		ft_rm(p);
-		return (ft_create_file(p, size));
+		return (ft_create_file(p));
 	}
-	*size = -1;
 	return (-1);
 }

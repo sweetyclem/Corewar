@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:51:08 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:08:50 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int	main(int ac, char **argv)
 	if (!content)
 		ft_exit_error("Error: can't read file");
 	parse_file(content, champ);
+	if (!(compile(champ, argv[1])))
+	{
+		free(content);
+		free_champ(champ);
+		ft_exit_error("Error creating .cor file");
+	}
 	free(content);
 	free_champ(champ);
 	return (0);
