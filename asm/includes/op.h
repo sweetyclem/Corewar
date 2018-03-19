@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/15 15:41:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 09:08:36 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ typedef char	t_arg_type;
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3
 
-typedef struct	s_op
+typedef struct		s_op
 {
 	char	*name;
 	int		nb_params;
@@ -70,9 +70,9 @@ typedef struct	s_op
 	char	*display_name;
 	int		param_byte;
 	int		has_index;
-}				t_op;
+}					t_op;
 
-extern t_op			op_tab;
+extern t_op			g_op_tab;
 
 typedef struct		s_header
 {

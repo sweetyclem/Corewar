@@ -6,7 +6,7 @@
 #    By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:05:55 by apopinea          #+#    #+#              #
-#    Updated: 2018/03/15 14:57:11 by cpirlot          ###   ########.fr        #
+#    Updated: 2018/03/19 08:28:30 by cpirlot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -392,30 +392,43 @@ SRDS = $(SRCS:.c=.d)
 FLAG = -Wall -Werror -Wextra -MMD -g
 CC = gcc
 
+# PROGRESS BAR
+T = $(words $(SROS))
+N = 0
+C = $(words $N)$(eval N := x $N)
+ECHO = "[`expr $C  '*' 100 / $T`%]"
+
+#Colors
+_GREEN=\x1b[32m
+_RED=\x1b[31m
+_CYAN=\x1b[36m
+_WHITE=\x1b[37m
+_END=\x1b[0m
+
 all: $(NAME)
 
 $(NAME): $(SROS)
 	@ar rc $(NAME) $(SROS)
 	@ranlib $(NAME)
-	@echo "\033[1m\033[32mSuccess : \033[0m compilation \033[33m\033[1mlibft.a\033[0m\n"
+	@echo "\n$(_GREEN)Success : $(_END)compilation libft.a"
 
 %.o: %.c
+	@printf "%-60b\r" "$(ECHO) $(_CYAN) Compiling $@ $(_END)"
 	@$(CC) $(FLAG) -o $@ -c $< $(DIR_H_TT)
-	@echo "\033[32m\033[1m[OK]\033[0m " $(notdir $<)
 
 
 clean:
 	@rm -f $(SROS) $(SRDS)
-	@echo "\033[1m\033[31msuppression libft *.o\033[0m"
+	@echo "$(_RED)suppression$(_END) libft *.o"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[1m\033[31msuppression libftprintf.a\033[0m"
+	@echo "$(_RED)suppression$(_END) libftprintf.a"
 
 re: fclean all
 
 ree: re
 	@rm -f $(SROS) $(SRDS)
-	@echo "\033[1m\033[31msuppression libft *.o\033[0m"
+	@echo "$(_RED)suppression$(_END) libft *.o"
 
 -include $(SROS:.o=.d)

@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 08:32:22 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 09:13:38 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	*get_label_name(t_champ *champ, char *line)
 	j = ft_strchr_i(line, LABEL_CHAR);
 	while (line[i] && line[i] != COMMENT_CHAR)
 	{
-		if (i == (j- 1) && ft_strchr(LABEL_CHARS, line[i]))
+		if (i == (j - 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
 			label = new_label();
 			label->name = ft_strndup(line, j);
 			add_label_end(champ, label);
 			line = line + j + 1;
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -47,7 +47,6 @@ void	get_param(t_instruct *inst, char *line)
 	{
 		inst->params[i].raw_value = ft_strdup(ft_strtrim_both(split[i]));
 		free(split[i]);
-		ft_printf("param : %s\n", inst->params[i].raw_value);
 		i++;
 	}
 	free(split);
@@ -85,6 +84,16 @@ void	parse_body(char *content, t_champ *champ)
 		get_instruct(champ, line);
 		free(line);
 		if (content[0] == '\0')
-			break;
+			break ;
+	}
+	t_instruct	*tmp = champ->instructs;
+	int	i;
+	while (tmp)
+	{
+		i = 0;
+		ft_printf("instruction : %s\n", tmp->name);
+		while (i < MAX_ARGS_NUMBER)
+			ft_printf("param : %s\n", tmp->params[i++].raw_value);
+		tmp = tmp->next;
 	}
 }

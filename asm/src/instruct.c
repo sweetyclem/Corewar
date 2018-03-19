@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:50:25 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 09:10:42 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct)
 void		free_instructs(t_instruct *instructs)
 {
 	t_instruct	*tmp_instruct;
-	int 		i;
+	int			i;
 
 	while (instructs)
 	{

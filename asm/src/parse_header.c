@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_header.c                                          :+:      :+:    :+:   */
+/*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 16:03:52 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 09:11:36 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	parse_file(char *content, t_champ *champ)
 {
 	content = parse_header(content, champ);
 	content = skip_comment_and_whitespace(content);
-	ft_printf("name : %s\ncomment : %s\nextend : %d\n", champ->name, champ->comment, champ->extend);
 	parse_body(content, champ);
 }
 
