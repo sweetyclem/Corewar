@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 15:32:43 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 16:24:55 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,22 @@ void	parse_body(char *content, t_champ *champ)
 			calc_param_value(&inst->params[i++], champ->labels, inst->address);
 		inst = inst->next;
 	}
+
+//DEBUG
+	// t_instruct	*tmp = champ->instructs;
+	// t_label    	*label = champ->labels;
+	// while (tmp)
+	// {
+	// 	i = 0;
+	// 	ft_printf("instruction : %s, adresse : %d\n", tmp->name, tmp->address);
+	// 	while (i < MAX_ARGS_NUMBER && tmp->params[i].raw_value)
+	// 		ft_printf("param type : %d\n", tmp->params[i++].type);
+	// 	tmp = tmp->next;
+	// }
+	// while (label)
+	// {
+	// 	ft_printf("label name: %s\n", label->name);
+	// 	ft_printf("label address: %d\n", label->address);
+	// 	label = label->next;
+	// }
 }
