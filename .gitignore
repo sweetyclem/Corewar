@@ -34,3 +34,6 @@ lbe_maker/dbug_log.txt
 lbe_maker/error_log.txt
 asm/asm
 asm/libft/libft.a
+asm/asm.dSYM/Contents/Info.plist
+asm/asm.dSYM/Contents/Resources/DWARF/asm
+.conf_v_code

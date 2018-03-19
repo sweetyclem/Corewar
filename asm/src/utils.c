@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:06:51 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 08:05:21 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ char	*point_to_next_line(char *str)
 	if (next && next + 1)
 		str = next + 1;
 	else
-		str = '\0';
+		str = "\0";
 	return (str);
 }

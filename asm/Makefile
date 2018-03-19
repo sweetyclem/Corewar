@@ -6,7 +6,7 @@
 #    By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/15 15:49:56 by cpirlot          ###   ########.fr        #
+#    Updated: 2018/03/19 08:15:58 by cpirlot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,19 +50,18 @@ $(OBJDIR)/%.o: %.c
 
 lib:
 	@make -C libft/
-	@echo "\nLibft compilation : $(_CYAN)done$(_END)"
 
 clean:
 	@$(RM) -rf $(OBJDIR)
 	@make clean -C libft/
-	@echo "clean asm: $(_CYAN)done$(_END)"
+	@echo "$(_RED)clean asm:$(_END) done"
 
 fclean: clean
 	@$(RM) -f $(NAME)
 	@$(RM) -f resources/players/$(NAME)
 	@$(RM) -f resources/$(NAME)
 	@make fclean -C libft/
-	@echo "fclean asm: $(_CYAN)done$(_END)"
+	@echo "$(_RED)fclean asm:$(_END) done"
 
 re:
 	@make fclean

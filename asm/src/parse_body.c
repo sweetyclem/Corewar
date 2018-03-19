@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 16:03:52 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 08:32:22 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ void	parse_body(char *content, t_champ *champ)
 		content = point_to_next_line(content);
 		get_instruct(champ, line);
 		free(line);
+		if (content[0] == '\0')
+			break;
 	}
 }
