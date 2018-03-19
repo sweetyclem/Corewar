@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 12:45:19 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:34:27 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
 int			get_param(t_instruct *inst, char *line);
+void		calc_param_value(t_param *param, t_label *labels, int inst_addr);
+int			get_label_addr(t_label *labels, char *name);
 
 /*
 ** Create Structures
@@ -42,7 +44,7 @@ void		free_instructs(t_instruct *instructs);
 ** Add at the end of linked list
 */
 void		add_label_end(t_champ *champ, t_label *label);
-void		add_instruct_end(t_champ *labt_champ, t_instruct *instruct);
+void		add_instruct_end(t_champ *t_champ, t_instruct *instruct);
 
 /*
 ** Utils

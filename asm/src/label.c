@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:50:25 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:12:56 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ t_label	*new_label(void)
 		return (NULL);
 	ft_memset(label, 0, sizeof(*label));
 	return (label);
+}
+
+int		get_label_addr(t_label *labels, char *name)
+{
+	t_label	*tmp;
+
+	tmp = labels;
+	while (tmp)
+	{
+		if (ft_strcmp(name, tmp->name) == 0)
+			return (tmp->address);
+		tmp = tmp->next;
+	}
+	return (-1);
 }
 
 void	add_label_end(t_champ *champ, t_label *label)

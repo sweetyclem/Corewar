@@ -6,13 +6,13 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 13:44:01 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 15:32:43 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-char	*get_label_name(t_champ *champ, char *line, int nb_bytes)
+char	*save_label_name(t_champ *champ, char *line, int nb_bytes)
 {
 	int		i;
 	int		j;
@@ -27,7 +27,8 @@ char	*get_label_name(t_champ *champ, char *line, int nb_bytes)
 			label = new_label();
 			label->name = ft_strndup(line, j);
 			label->address = nb_bytes;
-			add_label_end(champ, label);
+			if (champ)
+				add_label_end(champ, label);
 			line = line + j + 1;
 			break ;
 		}
@@ -44,7 +45,7 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 
 	i = 0;
 	line = ft_strtrim_both(line);
-	line = get_label_name(champ, line, nb_bytes);
+	line = save_label_name(champ, line, nb_bytes);
 	line = ft_skip_whitespace(line);
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
 		i++;
@@ -63,8 +64,10 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 
 void	parse_body(char *content, t_champ *champ)
 {
-	char	*line;
-	int		nb_bytes;
+	char		*line;
+	int			nb_bytes;
+	t_instruct	*inst;
+	int			i;
 
 	nb_bytes = 0;
 	while (content)
@@ -76,21 +79,13 @@ void	parse_body(char *content, t_champ *champ)
 		if (content[0] == '\0')
 			break ;
 	}
-	t_instruct	*tmp = champ->instructs;
-	t_label    	*label = champ->labels;
-	int	i;
-	while (tmp)
+	inst = champ->instructs;
+	while (inst)
 	{
 		i = 0;
-		ft_printf("instruction : %s, adresse : %d\n", tmp->name, tmp->address);
-		while (i < MAX_ARGS_NUMBER && tmp->params[i].type != 0)
-			ft_printf("param bytes : %d\n", tmp->params[i++].nb_bytes);
-		tmp = tmp->next;
-	}
-	while (label)
-	{
-		ft_printf("label name: %s\n", label->name);
-		ft_printf("label address: %d\n", label->address);
-		label = label->next;
+		ft_printf("instruction : %s\n", inst->name);
+		while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
+			calc_param_value(&inst->params[i++], champ->labels, inst->address);
+		inst = inst->next;
 	}
 }
