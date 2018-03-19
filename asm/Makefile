@@ -6,7 +6,7 @@
 #    By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/19 08:15:58 by cpirlot          ###   ########.fr        #
+#    Updated: 2018/03/19 12:45:31 by cpirlot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME	=  asm
 
 CC			= gcc
 FLAGS		= -Wall -Werror -Wextra -g
-SRC			= main.c champ.c label.c instruct.c \
-			parse_header.c parse_body.c utils.c
+SRC			= main.c champ.c label.c instruct.c op.c \
+			parse_header.c parse_body.c utils.c parse_params.c
 OBJDIR		= obj
 OBJ	= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
 VPATH:=src/:${VPATH}

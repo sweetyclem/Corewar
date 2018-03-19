@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/19 09:08:36 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 13:07:20 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,11 @@ typedef struct		s_op
 	int		opcode;
 	int		nb_cycles;
 	char	*display_name;
-	int		param_byte;
-	int		has_index;
+	int		has_opc;
+	int		dir_two_bytes;
 }					t_op;
 
-extern t_op			g_op_tab;
+extern t_op			g_op_tab[17];
 
 typedef struct		s_header
 {

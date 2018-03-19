@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/15 15:51:47 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 12:45:19 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
+int			get_param(t_instruct *inst, char *line);
 
 /*
 ** Create Structures
@@ -52,5 +53,6 @@ char		*point_to_next_line(char *str);
 char		*cut_first_line(char *str);
 char		*skip_comment_and_whitespace(char *content);
 char		*trim_comment(char *line);
+int			find_op(char *name);
 
 #endif
