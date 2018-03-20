@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 11:31:35 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 14:49:36 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int		calc_label(t_param *param, t_label *labels, int inst_addr)
 	int		res;
 
 	res = 0;
-	label = label_in_str(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
+	ft_printf("raw value: %s\n", param->raw_value);
+	label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
 	if (get_label_addr(labels, label) == -1)
 		ft_exit_error("Error: param points to non existent address");
 	if (inst_addr > get_label_addr(labels, label))
@@ -38,6 +39,8 @@ void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 
 	i = 0;
 	j = 0;
+	if (ft_strchr(param->raw_value, ' ') || ft_strchr(param->raw_value, '\t'))
+		ft_exit_error("Error: wrong parameter format");
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
 		param->value = calc_label(param, labels, inst_addr);
