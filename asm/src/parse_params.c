@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 11:13:13 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 11:19:24 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 	// if (ft_strchr(param->raw_value, '-'))
 		//substract values
 	if (!ft_strchr(param->raw_value, LABEL_CHAR)
-	&& !ft_strchr(param->raw_value, '+') && !ft_strchr(param->raw_value, '-'))
+	&& !ft_strchr(param->raw_value, '+'))
 	{
 		while (param->raw_value[i])
 		{
-			if (ft_isdigit(param->raw_value[i]))
+			if (param->raw_value[i] == '-' || ft_isdigit(param->raw_value[i]))
 				value[j++] = param->raw_value[i];
 			i++;
 		}
