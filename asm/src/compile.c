@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/19 23:07:53 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:25:26 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,100 @@ unsigned int swap32(unsigned int k)
     return ((k << 24) |
             ((k & 0x0000FF00) << 8) |
             ((k & 0x00FF0000) >> 8) |
-            (k >> 24)
-           );
+            (k >> 24));
 }
 
-
-
-void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
+void instr_and(t_instruct *instr, char *buf, int *ibuf)
 {
 	char *tmp;
+	char conf;
+
 	//
 	int i = 0;
 	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
 	while (i < MAX_ARGS_NUMBER)
 	{
-
-
 		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+		++i;
+	}
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	tmp = (char*)((long int)instr->opcode);
+	ft_memcpy(buf + *ibuf, &tmp, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+}
+
+void instr_sti(t_instruct *instr, char *buf, int *ibuf)
+{
+	char *tmp;
+	char conf;
+
+	//
+	int i = 0;
+	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	while (i < MAX_ARGS_NUMBER)
+	{
+		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+		++i;
+	}
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	// conf = reverse(conf);
+	tmp = (char*)((long int)instr->opcode);
+	ft_memcpy(buf + *ibuf, &tmp, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	tmp = (char*)((long int)instr->params[0].value);
+	ft_memcpy(buf + *ibuf, &tmp, instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	tmp = (char*)((long int)instr->params[1].value);
+	ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	tmp = (char*)((long int)instr->params[2].value);
+	ft_memcpy(buf + *ibuf, &tmp, instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+
+void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
+{
+	int *tmp;
+	//
+	int i = 0;
+	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	while (i < MAX_ARGS_NUMBER)
+	{
+		ft_printf("\t type %d | value : %x  / %d| raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
 		++i;
 	}
 	//
@@ -57,11 +134,11 @@ void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
 	// 	++i;
 	// }
 	// conf = conf << 2;
-	tmp = (char*)((long int)instr->opcode);
+	tmp = &(instr->opcode);
 	ft_memcpy(buf + *ibuf, &tmp, 1);
 	*ibuf += 1;
-	tmp = (char*)((long int)instr->params[0].value);
-	// ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[0].nb_bytes);
+	tmp = &(instr->params[0].value);
+	ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[0].nb_bytes - 1);
 	*ibuf += instr->params[0].nb_bytes;
 
 }
@@ -205,12 +282,12 @@ void init_tab_ptfct(t_tab_instr *tab)
 	tab[3] = &instr_st;
 	tab[4] = &useless;
 	tab[5] = &useless;
-	tab[6] = &useless;
+	tab[6] = &instr_and;
 	tab[7] = &useless;
 	tab[8] = &useless;
 	tab[9] = &instr_zjmp;
 	tab[10] = &useless;
-	tab[11] = &useless;
+	tab[11] = &instr_sti;
 	tab[12] = &instr_fork;
 	tab[13] = &useless;
 	tab[14] = &useless;
@@ -218,7 +295,7 @@ void init_tab_ptfct(t_tab_instr *tab)
 	tab[16] = &useless;
 }
 
-void write_prog(int fd, t_champ *champ, char *buf, int *ibuf)
+void write_prog(t_champ *champ, char *buf, int *ibuf)
 {
 	t_instruct *instr;
 	t_tab_instr tab[17];
@@ -230,8 +307,6 @@ void write_prog(int fd, t_champ *champ, char *buf, int *ibuf)
 		(*tab[instr->opcode])(instr, buf, ibuf);
 		instr = instr->next;
 	}
-	if (fd && buf && ibuf)
-		return ;
 }
 
 char wrt_file(int fd, t_champ *champ)
@@ -258,7 +333,7 @@ char wrt_file(int fd, t_champ *champ)
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 
-	write_prog(fd, champ, buf, &ibuf);
+	write_prog(champ, buf, &ibuf);
 
 	write(fd, buf, ibuf);
 	close (fd);
