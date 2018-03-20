@@ -6,32 +6,35 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 14:49:36 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:58:22 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int		calc_label(t_param *param, t_label *labels, int inst_addr)
+int		calc_label(t_param *param, int inst_addr, t_champ *c)
 {
 	char	*label;
 	int		res;
 
 	res = 0;
 	ft_printf("raw value: %s\n", param->raw_value);
-	label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
-	if (get_label_addr(labels, label) == -1)
-		ft_exit_error("Error: param points to non existent address");
-	if (inst_addr > get_label_addr(labels, label))
-		res = get_label_addr(labels, label) - inst_addr + 1;
+	if (!(label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1))
+	|| get_label_addr(c->labels, label) == -1)
+	{
+		ft_error_v(2, "sn", "Error: non existent label");
+		close_asm(c);
+	}
+	if (inst_addr > get_label_addr(c->labels, label))
+		res = get_label_addr(c->labels, label) - inst_addr + 1;
 	else
-		res = -1 * (inst_addr - get_label_addr(labels, label));
+		res = -1 * (inst_addr - get_label_addr(c->labels, label));
 	param->type = T_LAB;
 	free(label);
 	return (res);
 }
 
-void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
+void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
 	int		i;
 	int 	j;
@@ -40,10 +43,13 @@ void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 	i = 0;
 	j = 0;
 	if (ft_strchr(param->raw_value, ' ') || ft_strchr(param->raw_value, '\t'))
-		ft_exit_error("Error: wrong parameter format");
+	{
+		ft_error_v(2, "sn", "Error: wrong parameter format");
+		close_asm(c);
+	}
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
-		param->value = calc_label(param, labels, inst_addr);
+		param->value = calc_label(param, inst_addr, c);
 	if (!ft_strchr(param->raw_value, LABEL_CHAR)
 	&& !ft_strchr(param->raw_value, '+'))
 	{

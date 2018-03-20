@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 08:05:21 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 15:37:36 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,6 @@ char	*trim_comment(char *line)
 		i++;
 	}
 	return (line);
-}
-
-void	ft_exit_error(char *str)
-{
-	ft_printf("%s\n", str);
-	exit(0);
 }
 
 char	*cut_first_line(char *str)
