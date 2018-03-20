@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 09:27:34 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 09:29:04 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "struct.h"
 
+typedef void	(*t_tab_instr)(t_instruct*,char*,int*);
 /*
 ** Parsing
 */
@@ -25,6 +26,11 @@ void		parse_body(char *content, t_champ *champ);
 int			get_param(t_instruct *inst, char *line);
 void		calc_param_value(t_param *param, t_label *labels, int inst_addr);
 int			get_label_addr(t_label *labels, char *name);
+
+/*
+** Compiling
+*/
+char		compile(t_champ *champ, char *path);
 
 /*
 ** Create Structures

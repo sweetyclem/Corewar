@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:27:21 by apopinea          #+#    #+#             */
-/*   Updated: 2018/01/25 17:57:32 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/19 16:54:40 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdlib.h>
 
+void	*ft_memcpy_rev(void *dst, const void *src, size_t n);
 void				ft_memdel(void **ap);
 void				*ft_rememalloc(void *s, size_t l, size_t n);
 

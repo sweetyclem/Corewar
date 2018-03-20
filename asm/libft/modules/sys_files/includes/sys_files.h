@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sys_files.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apopinea <apopinea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 15:53:22 by Trichert          #+#    #+#             */
-/*   Updated: 2018/03/05 14:19:28 by apopinea         ###   ########.fr       */
+/*   Updated: 2018/03/19 12:45:01 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char		ft_compare_text(char *s1, char *s2, int opt, int fd);
 **		renvoi un file descriptor vers un fichier a creer
 **		au path passe en parametre.
 */
-int			ft_create_file(char *p, int *ibuf);
+int			ft_create_file(char *p);
 
 /*
 **	ft_init_path -> libft/sys_files/ft_init_path.c

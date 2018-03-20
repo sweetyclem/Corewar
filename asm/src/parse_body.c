@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_body.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 16:24:55 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 18:59:38 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 {
 	t_instruct	*instruct;
 	int			i;
-	int			op;
 
 	i = 0;
 	line = ft_strtrim_both(line);
@@ -53,10 +52,10 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 	{
 		instruct = new_instruct();
 		instruct->name = ft_strndup(line, i);
-		op = find_op(instruct->name);
+		instruct->opcode = find_op(instruct->name);
 		line = &line[i];
 		instruct->address = nb_bytes;
-		nb_bytes += 1 + g_op_tab[op].has_opc + get_param(instruct, line);
+		nb_bytes += 1 + g_op_tab[instruct->opcode].has_opc + get_param(instruct, line);
 		add_instruct_end(champ, instruct);
 	}
 	return (nb_bytes);
