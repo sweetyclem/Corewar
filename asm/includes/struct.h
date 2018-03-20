@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:13:51 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 15:46:57 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 11:51:22 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ typedef struct	s_champ
 {
 	char		*name;
 	char		*comment;
-	int			extend;
 	t_label		*labels;
 	t_instruct	*instructs;
 }				t_champ;

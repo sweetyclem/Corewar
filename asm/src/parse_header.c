@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 17:05:44 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/20 11:51:38 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ char	*parse_header(char *content, t_champ *champ)
 	champ->name = get_name_or_comment(&content, NAME_CMD_STRING);
 	champ->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	content = skip_comment_and_whitespace(content);
-	if (ft_strncmp(content, ".extend", ft_strlen(".extend")) == 0)
-	{
-		champ->extend = 1;
-		content = point_to_next_line(content);
-	}
 	if (!champ->name)
 		ft_exit_error("Program needs to have a name");
 	if (!champ->comment)
