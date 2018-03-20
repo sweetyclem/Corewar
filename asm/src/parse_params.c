@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 11:19:24 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 11:31:35 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
 		param->value = calc_label(param, labels, inst_addr);
-	// if (ft_strchr(param->raw_value, '+'))
-		//add values
-	// if (ft_strchr(param->raw_value, '-'))
-		//substract values
 	if (!ft_strchr(param->raw_value, LABEL_CHAR)
 	&& !ft_strchr(param->raw_value, '+'))
 	{
