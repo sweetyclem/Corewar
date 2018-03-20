@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 15:12:56 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 11:13:19 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,29 @@ t_label	*new_label(void)
 	if (!(label = malloc(sizeof(t_label))))
 		return (NULL);
 	ft_memset(label, 0, sizeof(*label));
+	return (label);
+}
+
+char	*label_in_str(char *str)
+{
+	int		i;
+	int		j;
+	char	*label;
+
+	i = 0;
+	j = 0;
+	if (!(label = ft_strnew(ft_strlen(str))))
+		ft_exit_error("Malloc error");
+	while (str[i] && (str[i] != ' ' && str[i] != '\t'))
+	{
+		if (ft_strchr(LABEL_CHARS, str[i]))
+		{
+			label[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str = &str[i];
 	return (label);
 }
 
