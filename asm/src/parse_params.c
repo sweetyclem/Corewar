@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 10:01:25 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/19 18:05:25 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
+
+char	*label_in_value(char *str)
+{
+	int		i;
+	int		j;
+	char	*label;
+
+	i = 0;
+	j = 0;
+	if (!(label = ft_strnew(ft_strlen(str))))
+		ft_exit_error("Malloc error");
+	while (str[i] && (str[i] != ' ' && str[i] != '\t'))
+	{
+		if (ft_strchr(LABEL_CHARS, str[i]))
+		{
+			label[j] = str[i];
+			j++;
+		}
+		i++;
+	}
+	str = &str[i];
+	return (label);
+}
 
 int		calc_label(t_param *param, t_label *labels, int inst_addr)
 {
@@ -18,7 +41,7 @@ int		calc_label(t_param *param, t_label *labels, int inst_addr)
 	int		res;
 
 	res = 0;
-	label = label_in_str(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
+	label = label_in_value(ft_strchr(param->raw_value, LABEL_CHAR) + 1);
 	if (get_label_addr(labels, label) == -1)
 		ft_exit_error("Error: param points to non existent address");
 	if (inst_addr > get_label_addr(labels, label))
@@ -29,8 +52,6 @@ int		calc_label(t_param *param, t_label *labels, int inst_addr)
 	free(label);
 	return (res);
 }
-
-
 
 void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 {
@@ -43,21 +64,22 @@ void	calc_param_value(t_param *param, t_label *labels, int inst_addr)
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
 		param->value = calc_label(param, labels, inst_addr);
-	// if ( param->type == T_LAB && (ft_strchr(param->raw_value, '+')
-	// || (ft_strchr(param->raw_value, '-')))
+	// if (ft_strchr(param->raw_value, '+'))
 		//add values
-	if (!ft_strchr(param->raw_value, LABEL_CHAR) && param->type != T_LAB
-	&& !ft_strchr(param->raw_value, '+'))
+	// if (ft_strchr(param->raw_value, '-'))
+		//substract values
+	if (!ft_strchr(param->raw_value, LABEL_CHAR)
+	&& !ft_strchr(param->raw_value, '+') && !ft_strchr(param->raw_value, '-'))
 	{
 		while (param->raw_value[i])
 		{
-			if (param->raw_value[i] == '-' || ft_isdigit(param->raw_value[i]))
+			if (ft_isdigit(param->raw_value[i]))
 				value[j++] = param->raw_value[i];
 			i++;
 		}
 		param->value = ft_atoi(value);
-	ft_printf("param value : %d\n", param->value);
 	}
+	ft_printf("value : %d\n", param->value);
 }
 
 void	get_param_type(t_param	*param)
