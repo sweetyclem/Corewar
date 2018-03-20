@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 15:50:09 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:05:50 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "libft.h"
 # include "struct.h"
 
-typedef void	(*t_tab_instr)(t_instruct*,char*,int*);
+typedef void	(*t_tab_instr)(t_instruct*, char*, int*);
+
 /*
 ** Parsing
 */

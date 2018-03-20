@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 15:58:22 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:08:34 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 	int		res;
 
 	res = 0;
-	ft_printf("raw value: %s\n", param->raw_value);
 	if (!(label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1))
 	|| get_label_addr(c->labels, label) == -1)
 	{
@@ -37,7 +36,7 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
 	int		i;
-	int 	j;
+	int		j;
 	char	value[ft_strlen(param->raw_value)];
 
 	i = 0;
@@ -64,12 +63,12 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 	ft_printf("value : %d\n", param->value);
 }
 
-void	get_param_type(t_param	*param)
+void	get_param_type(t_param *param)
 {
 	if (param->raw_value && param->raw_value[0] == 'r')
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)
-			param->type = T_DIR;
+		param->type = T_DIR;
 	else if (param->raw_value && param->raw_value[0] == LABEL_CHAR)
 		param->type = T_IND;
 }
@@ -77,9 +76,9 @@ void	get_param_type(t_param	*param)
 int		get_nb_bytes(t_instruct *instruct)
 {
 	t_param	*params;
-	int			i;
-	int			op;
-	int			nb_bytes;
+	int		i;
+	int		op;
+	int		nb_bytes;
 
 	i = 0;
 	op = find_op(instruct->name);
