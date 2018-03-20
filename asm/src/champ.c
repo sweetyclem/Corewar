@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:03:58 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:11:31 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ t_champ	*new_champ(void)
 	return (champ);
 }
 
-void	close_asm(t_champ *champ)
+void	close_asm(t_champ *champ, char *str)
 {
 	free_champ(champ);
+	ft_error_v(2, "sn", str);
 	exit(0);
 }
 

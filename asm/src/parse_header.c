@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 15:54:50 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:13:18 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,8 @@ char	*parse_header(char *content, t_champ *champ)
 	champ->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	content = skip_comment_and_whitespace(content);
 	if (!champ->name || !champ->comment)
-	{
-		ft_error_v(2, "sn", "Error: champ needs to have a comment, even empty");
-		close_asm(champ);
-	}
+		close_asm(champ, "Error: champ needs to have a comment, even empty");
 	if (ft_strchr(content, '.'))
-	{
-		ft_error_v(2, "sn", "Error: unknown command");
-		close_asm(champ);
-	}
+		close_asm(champ, "Error: unknown command");
 	return (content);
 }

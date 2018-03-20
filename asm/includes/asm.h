@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:05:50 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:12:26 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		compile(t_champ *champ, char *path);
 t_champ		*new_champ(void);
 t_label		*new_label(void);
 t_instruct	*new_instruct(void);
-void		close_asm(t_champ *champ);
+void		close_asm(t_champ *champ, char *str);
 
 /*
 ** Free Structures

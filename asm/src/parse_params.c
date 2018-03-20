@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:08:34 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:13:48 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 	res = 0;
 	if (!(label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1))
 	|| get_label_addr(c->labels, label) == -1)
-	{
-		ft_error_v(2, "sn", "Error: non existent label");
-		close_asm(c);
-	}
+		close_asm(c, "Error: non existent label");
 	if (inst_addr > get_label_addr(c->labels, label))
 		res = get_label_addr(c->labels, label) - inst_addr + 1;
 	else
@@ -42,10 +39,7 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 	i = 0;
 	j = 0;
 	if (ft_strchr(param->raw_value, ' ') || ft_strchr(param->raw_value, '\t'))
-	{
-		ft_error_v(2, "sn", "Error: wrong parameter format");
-		close_asm(c);
-	}
+		close_asm(c, "Error: wrong parameter format");
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
 		param->value = calc_label(param, inst_addr, c);
