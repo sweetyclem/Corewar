@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:13:48 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 17:25:16 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 	|| get_label_addr(c->labels, label) == -1)
 		close_asm(c, "Error: non existent label");
 	if (inst_addr > get_label_addr(c->labels, label))
-		res = get_label_addr(c->labels, label) - inst_addr + 1;
+		res = get_label_addr(c->labels, label) - inst_addr;
 	else
 		res = -1 * (inst_addr - get_label_addr(c->labels, label));
 	param->type = T_LAB;
