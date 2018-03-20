@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_body.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 18:59:38 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/20 10:30:49 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 	int			i;
 
 	i = 0;
-	line = ft_strtrim_both(line);
 	line = save_label_name(champ, line, nb_bytes);
 	line = ft_skip_whitespace(line);
 	while (line[i] && line[i] != ' ' && line[i] != '\t')
@@ -71,6 +70,7 @@ void	parse_body(char *content, t_champ *champ)
 	nb_bytes = 0;
 	while (content)
 	{
+		content = skip_comment_and_whitespace(content);
 		line = cut_first_line(content);
 		content = point_to_next_line(content);
 		nb_bytes = get_instruct(champ, line, nb_bytes);
