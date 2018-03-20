@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 15:34:27 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 09:27:34 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		free_instructs(t_instruct *instructs);
 ** Add at the end of linked list
 */
 void		add_label_end(t_champ *champ, t_label *label);
-void		add_instruct_end(t_champ *t_champ, t_instruct *instruct);
+void		add_instruct_end(t_champ *champ, t_instruct *instruct);
 
 /*
 ** Utils
