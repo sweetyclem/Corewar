@@ -6,66 +6,221 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/19 23:07:53 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:21:50 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-unsigned char reverse(unsigned char b) {
-	b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
-	b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
-	b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
-	return b;
-}
 
-unsigned int swap32(unsigned int k)
+void instr_add(t_instruct *instr, char *buf, int *ibuf)
 {
-    return ((k << 24) |
-            ((k & 0x0000FF00) << 8) |
-            ((k & 0x00FF0000) >> 8) |
-            (k >> 24)
-           );
-}
+	char conf;
+	int i;
 
-
-
-void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
-{
-	char *tmp;
 	//
-	int i = 0;
+	// i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+void instr_and(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	//
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+void instr_or(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	i = 0;
+	//
 	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
 	while (i < MAX_ARGS_NUMBER)
 	{
-
-
 		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
 		++i;
 	}
-	//
-
-	// conf = 0;
-	// while (i < 4)
-	// {
-	// 	if (instr->params[i].type == T_REG)
-	// 		conf |= OCP_REG;
-	// 	else if (instr->params[i].type == T_DIR)
-	// 		conf |= OCP_DIR;
-	// 	else if (instr->params[i].type == T_IND)
-	// 		conf |= OCP_IND;
-	// 	conf = conf << 2;
-	// 	++i;
-	// }
-	// conf = conf << 2;
-	tmp = (char*)((long int)instr->opcode);
-	ft_memcpy(buf + *ibuf, &tmp, 1);
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
-	tmp = (char*)((long int)instr->params[0].value);
-	// ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[0].nb_bytes);
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
 	*ibuf += instr->params[0].nb_bytes;
-
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
 }
 
+void instr_sub(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+
+void instr_sti(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	//
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &instr->opcode, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes - 1);
+	*ibuf += instr->params[2].nb_bytes;
+}
+
+void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
+{
+	//
+	// int i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x  / %d| raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	//
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
+}
 
 void instr_fork(t_instruct *instr, char *buf, int *ibuf)
 {
@@ -77,72 +232,30 @@ void instr_fork(t_instruct *instr, char *buf, int *ibuf)
 	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
 	// 	++i;
 	// }
-	return ;
-	if (instr && buf && ibuf)
-		return ;
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
 }
 
 void instr_st(t_instruct *instr, char *buf, int *ibuf)
 {
-	// char *tmp;
-	// char conf;
-
-	///
-	// int i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	//
-
-
-	// i = 0;
-	// conf = 0;
-	// while (i < 2)
-	// {
-	// 	if (instr->params[i].type == T_REG)
-	// 		conf |= OCP_REG;
-	// 	else if (instr->params[i].type == T_DIR)
-	// 		conf |= OCP_DIR;
-	// 	else if (instr->params[i].type == T_IND)
-	// 		conf |= OCP_IND;
-	// 	conf = conf << 2;
-	// 	++i;
-	// }
-	// conf = conf << 2;
-	// tmp = (char*)((long int)instr->opcode);
-	// ft_memcpy(buf + *ibuf, &tmp, 1);
-	// *ibuf += 1;
-	// ft_memcpy(buf + *ibuf, &conf, 1);
-	// *ibuf += 1;
-
-
-	return ;
-	if (instr && buf && ibuf)
-		return ;
-}
-
-void instr_ld(t_instruct *instr, char *buf, int *ibuf)
-{
-	char *tmp;
 	char conf;
-	int i;
-	///
-	// int i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
 
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
+	///
+	int i = 0;
+	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	while (i < MAX_ARGS_NUMBER)
+	{
+
+		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+		++i;
+	}
 	//
+
 	i = 0;
 	conf = 0;
-	while (i < 2)
+	while (i < 4)
 	{
 		if (instr->params[i].type == T_REG)
 			conf |= OCP_REG;
@@ -150,44 +263,269 @@ void instr_ld(t_instruct *instr, char *buf, int *ibuf)
 			conf |= OCP_DIR;
 		else if (instr->params[i].type == T_IND)
 			conf |= OCP_IND;
-		conf = conf << 2;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
 		++i;
 	}
-	conf = conf << 2;
-	tmp = (char*)((long int)instr->opcode);
-	ft_memcpy(buf + *ibuf, &tmp, 1);
+
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
 	*ibuf += 1;
-	tmp = (char*)(long int)instr->params[0].value;
-	ft_memcpy(buf + *ibuf, &tmp, instr->params[0].nb_bytes);
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
 	*ibuf +=  instr->params[0].nb_bytes;
-	tmp = (char*)(long int)instr->params[1].value;
-	ft_memcpy(buf + *ibuf, &tmp, instr->params[1].nb_bytes);
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
 	*ibuf +=  instr->params[1].nb_bytes;
+}
 
+void instr_ld(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf +=  instr->params[0].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes);
+	*ibuf +=  instr->params[1].nb_bytes;
 }
 
 void instr_live(t_instruct *instr, char *buf, int *ibuf)
 {
-	char	*tmp;
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
+}
 
-	///
-	// int i = 0;
+void instr_xor(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	// //
+	// i = 0;
 	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
 	// while (i < MAX_ARGS_NUMBER)
 	// {
 	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
 	// 	++i;
 	// }
-	//
-	tmp = (char*)((long int)instr->opcode);
-	ft_memcpy(buf + *ibuf, &tmp, 1);
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
-	tmp = (char*)((long int)instr->params[0].value);
-	ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[0].nb_bytes - 1);
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+void instr_ldi(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	// //
+	// i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+
+void instr_lld(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	// //
+	// i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+void instr_lldi(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	// //
+	// i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
+	*ibuf += instr->params[0].nb_bytes;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes - 1);
+	*ibuf += instr->params[1].nb_bytes;
+	ft_memcpy(buf + *ibuf, &(instr->params[2].value), instr->params[2].nb_bytes);
+	*ibuf += instr->params[2].nb_bytes;
+}
+
+void instr_lfork(t_instruct *instr, char *buf, int *ibuf)
+{
+	// int i = 0;
+	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
+	// while (i < MAX_ARGS_NUMBER)
+	// {
+
+	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
+	// 	++i;
+	// }
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
 	*ibuf += instr->params[0].nb_bytes;
 }
+
+void instr_aff(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+	int i;
+
+	i = 0;
+	conf = 0;
+	while (i < 4)
+	{
+		if (instr->params[i].type == T_REG)
+			conf |= OCP_REG;
+		else if (instr->params[i].type == T_DIR)
+			conf |= OCP_DIR;
+		else if (instr->params[i].type == T_IND)
+			conf |= OCP_IND;
+		else if (instr->params[i].type == T_LAB)
+			conf |= OCP_DIR;
+		if (i < 3)
+			conf = conf << 2;
+		++i;
+	}
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &conf, 1);
+	*ibuf += 1;
+	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	*ibuf +=  instr->params[0].nb_bytes;
+}
+
 void useless(t_instruct *instr, char *buf, int *ibuf)
 {
 	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
@@ -203,22 +541,22 @@ void init_tab_ptfct(t_tab_instr *tab)
 	tab[1] = &instr_live;
 	tab[2] = &instr_ld;
 	tab[3] = &instr_st;
-	tab[4] = &useless;
-	tab[5] = &useless;
-	tab[6] = &useless;
-	tab[7] = &useless;
-	tab[8] = &useless;
+	tab[4] = &instr_add;
+	tab[5] = &instr_sub;
+	tab[6] = &instr_and;
+	tab[7] = &instr_or;
+	tab[8] = &instr_xor;
 	tab[9] = &instr_zjmp;
-	tab[10] = &useless;
-	tab[11] = &useless;
+	tab[10] = &instr_ldi;
+	tab[11] = &instr_sti;
 	tab[12] = &instr_fork;
-	tab[13] = &useless;
-	tab[14] = &useless;
-	tab[15] = &useless;
-	tab[16] = &useless;
+	tab[13] = &instr_lld;
+	tab[14] = &instr_lldi;
+	tab[15] = &instr_lfork;
+	tab[16] = &instr_aff;
 }
 
-void write_prog(int fd, t_champ *champ, char *buf, int *ibuf)
+void write_prog(t_champ *champ, char *buf, int *ibuf)
 {
 	t_instruct *instr;
 	t_tab_instr tab[17];
@@ -230,8 +568,6 @@ void write_prog(int fd, t_champ *champ, char *buf, int *ibuf)
 		(*tab[instr->opcode])(instr, buf, ibuf);
 		instr = instr->next;
 	}
-	if (fd && buf && ibuf)
-		return ;
 }
 
 char wrt_file(int fd, t_champ *champ)
@@ -252,13 +588,17 @@ char wrt_file(int fd, t_champ *champ)
 	ft_printf("x : %d\n", fd_n_x >> 16);
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
-	// ecrire longueur exec sur 2 octet ici//
+	// ecrire longueur programme ici //
+	fd_n_x = 8 << 16;
+	fd_n_x |= fd ;
+	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
+	//
 	ft_putbuf_fd_np(fd, champ->comment, buf, &ibuf);
-	fd_n_x = (COMMENT_LENGTH - ft_strlen(champ->comment)) << 16;
+	fd_n_x = ((COMMENT_LENGTH - ft_strlen(champ->comment)) + 4) << 16;
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 
-	write_prog(fd, champ, buf, &ibuf);
+	write_prog(champ, buf, &ibuf);
 
 	write(fd, buf, ibuf);
 	close (fd);
