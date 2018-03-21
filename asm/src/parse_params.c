@@ -18,6 +18,8 @@ int		check_params(t_instruct *inst)
 	t_op	op;
 
 	i = 0;
+	if (find_op(inst->name) == 0)
+		return (0);
 	op = g_op_tab[find_op(inst->name)];
 	while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
 		i++;
