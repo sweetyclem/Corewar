@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 17:25:16 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:30:47 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	get_param_type(t_param *param)
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)
 		param->type = T_DIR;
-	else if (param->raw_value && param->raw_value[0] == LABEL_CHAR)
+	else //if (param->raw_value && param->raw_value[0] == LABEL_CHAR)
 		param->type = T_IND;
 }
 

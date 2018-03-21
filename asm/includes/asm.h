@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:12:26 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 17:17:26 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ char		*cut_first_line(char *str);
 char		*skip_comment_and_whitespace(char *content);
 char		*trim_comment(char *line);
 int			find_op(char *name);
+int			str_is_digits(char *str);
 
 #endif
