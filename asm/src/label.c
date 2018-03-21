@@ -49,7 +49,6 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 		res = get_label_addr(c->labels, label) - inst_addr;
 	else
 		res = -1 * (inst_addr - get_label_addr(c->labels, label));
-	param->type = T_LAB;
 	free(label);
 	return (res);
 }
