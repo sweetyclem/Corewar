@@ -32,27 +32,36 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 
 void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
-	int		i;
-	int		j;
 	char	value[ft_strlen(param->raw_value)];
 
-	i = 0;
-	j = 0;
 	if (ft_strchr(param->raw_value, ' ') || ft_strchr(param->raw_value, '\t'))
 		close_asm(c, "Error: wrong parameter format");
 	ft_bzero(value, ft_strlen(param->raw_value));
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
 		param->value = calc_label(param, inst_addr, c);
-	if (!ft_strchr(param->raw_value, LABEL_CHAR)
-	&& !ft_strchr(param->raw_value, '+'))
+	ft_printf("type: %d\n", param->type);
+	if (!ft_strchr(param->raw_value, LABEL_CHAR))
 	{
-		while (param->raw_value[i])
+		if (param->type == T_REG)
 		{
-			if (param->raw_value[i] == '-' || ft_isdigit(param->raw_value[i]))
-				value[j++] = param->raw_value[i];
-			i++;
+			if (!str_is_digits(&param->raw_value[1])
+			|| ft_atoi(&param->raw_value[1]) > REG_NUMBER
+			|| ft_atoi(&param->raw_value[1]) < 0)
+				close_asm(c, "Error: wrong format for reg param");
+			param->value = ft_atoi(&param->raw_value[1]);
 		}
-		param->value = ft_atoi(value);
+		else if (param->type == T_DIR)
+		{
+			if (!str_is_digits(&param->raw_value[1]))
+				close_asm(c, "Error: direct param must be a number");
+			param->value = ft_atoi(&param->raw_value[1]);
+		}
+		else if (param->type == T_IND)
+		{
+			if (!str_is_digits(param->raw_value))
+				close_asm(c, "Error: direct param must be a number");
+			param->value = ft_atoi(param->raw_value);
+		}
 	}
 	ft_printf("value : %d\n", param->value);
 }
@@ -63,7 +72,7 @@ void	get_param_type(t_param *param)
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)
 		param->type = T_DIR;
-	else if (param->raw_value && param->raw_value[0] == LABEL_CHAR)
+	else if (param->raw_value)
 		param->type = T_IND;
 }
 
