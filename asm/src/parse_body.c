@@ -87,11 +87,9 @@ void	parse_body(char *content, t_champ *champ)
 		i = 0;
 		ft_printf("instruction : %s\n", inst->name);
 		while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
-		{
-			param_value(&inst->params[i], inst->address, champ);
-			ft_printf("param %d value : %d\n", i, inst->params[i].value);
-			i++;
-		}
+			param_value(&inst->params[i++], inst->address, champ);
+		if (!(check_params(inst)))
+			close_asm(champ, "Error: wrong parameters for instruction");
 		inst = inst->next;
 	}
 }

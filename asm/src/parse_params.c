@@ -12,6 +12,27 @@
 
 #include "asm.h"
 
+int		check_params(t_instruct *inst)
+{
+	int 	i;
+	t_op	op;
+
+	i = 0;
+	op = g_op_tab[find_op(inst->name)];
+	while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
+		i++;
+	if (i != op.nb_params)
+		return (0);
+	i = 0;
+	while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
+	{
+		if (!(inst->params[i].type & op.params_types[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
