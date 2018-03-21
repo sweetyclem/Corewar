@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/20 17:25:26 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:40:58 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void instr_sti(t_instruct *instr, char *buf, int *ibuf)
 
 void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
 {
-	int *tmp;
 	//
 	int i = 0;
 	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
@@ -134,11 +133,9 @@ void instr_zjmp(t_instruct *instr, char *buf, int *ibuf)
 	// 	++i;
 	// }
 	// conf = conf << 2;
-	tmp = &(instr->opcode);
-	ft_memcpy(buf + *ibuf, &tmp, 1);
+	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
-	tmp = &(instr->params[0].value);
-	ft_memcpy_rev(buf + *ibuf, &tmp, instr->params[0].nb_bytes - 1);
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
 	*ibuf += instr->params[0].nb_bytes;
 
 }

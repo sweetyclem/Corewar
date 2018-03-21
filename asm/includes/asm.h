@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 14:47:19 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/20 16:12:26 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "libft.h"
 # include "struct.h"
 
-typedef void	(*t_tab_instr)(t_instruct*,char*,int*);
+typedef void	(*t_tab_instr)(t_instruct*, char*, int*);
+
 /*
 ** Parsing
 */
@@ -24,7 +25,7 @@ void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
 int			get_param(t_instruct *inst, char *line);
-void		calc_param_value(t_param *param, t_label *labels, int inst_addr);
+void		param_value(t_param *param, int inst_addr, t_champ *c);
 int			get_label_addr(t_label *labels, char *name);
 
 /*
@@ -38,6 +39,7 @@ char		compile(t_champ *champ, char *path);
 t_champ		*new_champ(void);
 t_label		*new_label(void);
 t_instruct	*new_instruct(void);
+void		close_asm(t_champ *champ, char *str);
 
 /*
 ** Free Structures
@@ -55,7 +57,6 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct);
 /*
 ** Utils
 */
-void		ft_exit_error(char *str);
 char		*ft_skip_whitespace(char *str);
 char		*point_to_next_line(char *str);
 char		*cut_first_line(char *str);

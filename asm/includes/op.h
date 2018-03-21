@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/19 21:34:38 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/20 17:40:58 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define MAX_ARGS_NUMBER			4
 # define MAX_PLAYERS				4
 # define MEM_SIZE				(4*1024)
-# define IDX_MOD					MEM_SIZE / 8)
+# define IDX_MOD				(MEM_SIZE / 8)
 # define CHAMP_MAX_SIZE			(MEM_SIZE / 6)
 
 # define COMMENT_CHAR			'#'
@@ -51,11 +51,9 @@
 
 typedef char	t_arg_type;
 
-
 # define OCP_REG				0b01
 # define OCP_DIR				0b10
 # define OCP_IND				0b11
-
 
 # define T_REG					1
 # define T_DIR					2
