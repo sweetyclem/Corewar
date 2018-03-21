@@ -1,5 +1,5 @@
-.name ""
-.comment ""
+.name "A"
+.comment "A"
 
 l2:		sti r5, %:live, %5
 		aff r15

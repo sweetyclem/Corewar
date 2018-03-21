@@ -6,25 +6,12 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/21 14:39:56 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:21:50 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-// unsigned char reverse(unsigned char b) {
-// 	b = (b & 0xF0) >> 4 | (b & 0x0F) << 4;
-// 	b = (b & 0xCC) >> 2 | (b & 0x33) << 2;
-// 	b = (b & 0xAA) >> 1 | (b & 0x55) << 1;
-// 	return b;
-// }
 
-// unsigned int swap32(unsigned int k)
-// {
-//     return ((k << 24) |
-//             ((k & 0x0000FF00) << 8) |
-//             ((k & 0x00FF0000) >> 8) |
-//             (k >> 24));
-// }
 void instr_add(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
@@ -601,9 +588,13 @@ char wrt_file(int fd, t_champ *champ)
 	ft_printf("x : %d\n", fd_n_x >> 16);
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
-	// ecrire longueur exec sur 2 octet ici//
+	// ecrire longueur programme ici //
+	fd_n_x = 8 << 16;
+	fd_n_x |= fd ;
+	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
+	//
 	ft_putbuf_fd_np(fd, champ->comment, buf, &ibuf);
-	fd_n_x = (COMMENT_LENGTH - ft_strlen(champ->comment)) << 16;
+	fd_n_x = ((COMMENT_LENGTH - ft_strlen(champ->comment)) + 4) << 16;
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 
