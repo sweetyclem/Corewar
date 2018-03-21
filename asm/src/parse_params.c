@@ -45,7 +45,7 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 		{
 			if (!str_is_digits(&param->raw_value[1])
 			|| ft_atoi(&param->raw_value[1]) > REG_NUMBER
-			|| ft_atoi(&param->raw_value[1]) < 0)
+			|| ft_atoi(&param->raw_value[1]) < 1)
 				close_asm(c, "Error: wrong format for reg param");
 			param->value = ft_atoi(&param->raw_value[1]);
 		}
