@@ -14,3 +14,10 @@ N=`echo ../champs/Octobre_Rouge_V4.2` S=`echo $N.s` COR=`echo $N.cor` && ./asm $
 N=`echo ../champs/slider2` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
 N=`echo ../champs/test` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
 N=`echo ../champs/toto` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+
+N=`echo ../champs/examples/bee_gees` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+N=`echo ../champs/examples/bigzork` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+N=`echo ../champs/examples/fluttershy` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+N=`echo ../champs/examples/helltrain` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+N=`echo ../champs/examples/turtle` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42
+N=`echo ../champs/examples/zork` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ../asm42 $S && hexdump $COR > testasm42 && diff testasm testasm42

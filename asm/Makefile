@@ -6,14 +6,14 @@
 #    By: trichert <trichert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/19 18:07:49 by trichert         ###   ########.fr        #
+#    Updated: 2018/03/21 19:00:37 by trichert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=  asm
 
 CC			= gcc
-FLAGS		= -Wall -Werror -Wextra -g
+FLAGS		= -Wall -Werror -Wextra -g -MMD
 SRC			= champ.c 		\
 			compile.c		\
 			instruct.c		\
@@ -23,10 +23,25 @@ SRC			= champ.c 		\
 			parse_body.c	\
 			parse_header.c	\
 			parse_params.c  \
-			utils.c
+			utils_1.c		\
+			utils_2.c
+
+DIR_INC 	= includes/
+INCS 		= asm.h \
+			op.h \
+			struct.h
+
+INC = $(addprefix $(DIR_INC), $(INCS))
+
+DIR_LIBFT = ./libft/
+DIR_H_LIBFT = ./libft/includes
+LIBFT_A = ./libft/libft.a
+
+
 
 OBJDIR		= obj
 OBJ	= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
+SRD = $(addprefix $(OBJDIR)/,$(SRC:.c=.d))
 VPATH:=src/:${VPATH}
 
 # PROGRESS BAR
@@ -49,27 +64,27 @@ _END=\x1b[0m
 all: $(NAME)
 
 $(NAME): lib $(OBJ)
-	@$(CC) $(FLAGS) $(OBJ) -o $@ -I includes/ -L libft/ -lft
+	@$(CC) $(FLAGS) $(OBJ) -o $@ -I $(DIR_INC) -L $(DIR_LIBFT) -lft
 	@echo "\nAsm compilation : $(_CYAN)done$(_END)"
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p obj
 	@printf "%-60b\r" "$(ECHO) $(_CYAN) Compiling $@ $(_END)"
-	@$(CC) $(FLAGS) -c $< -o $@ -I includes/ -I libft/includes/
+	@$(CC) $(FLAGS) -c $< -o $@ -I $(DIR_INC) -I $(DIR_H_LIBFT)
 
 lib:
 	@make -C libft/
 
 clean:
 	@$(RM) -rf $(OBJDIR)
-	@make clean -C libft/
+	@make clean -C $(DIR_LIBFT)
 	@echo "$(_RED)clean asm:$(_END) done"
 
 fclean: clean
 	@$(RM) -f $(NAME)
 	@$(RM) -f resources/players/$(NAME)
 	@$(RM) -f resources/$(NAME)
-	@make fclean -C libft/
+	@make fclean -C $(DIR_LIBFT)
 	@echo "$(_RED)fclean asm:$(_END) done"
 
 re:
@@ -78,3 +93,4 @@ re:
 
 
 .PHONY: all clean fclean re
+-include $(OBJ:.o=.d)

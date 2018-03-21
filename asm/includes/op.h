@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2018/03/21 17:22:12 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:42:02 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #ifndef OP_H
 # define OP_H
 
-# define DBUG					1
+# define DBUG					0
 
 # define IND_SIZE				2
 # define REG_SIZE				4
