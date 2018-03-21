@@ -28,6 +28,7 @@ int			get_param(t_instruct *inst, char *line);
 void		param_value(t_param *param, int inst_addr, t_champ *c);
 int			get_label_addr(t_label *labels, char *name);
 int			calc_label(t_param *param, int inst_addr, t_champ *c);
+int			check_params(t_instruct *inst);
 
 /*
 ** Compiling
