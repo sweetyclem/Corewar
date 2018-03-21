@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:13:09 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:03:33 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:58:34 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ int	main(int ac, char **argv)
 	t_champ	*champ;
 
 	content = NULL;
-	champ = new_champ();
+	if (!(champ = (t_champ*)ft_memalloc(sizeof(t_champ))))
+		return (ft_error_d(2, "RFLsn", FFL, E_MLC));
 	if (ac == 2 && (ft_strcmp(&argv[1][ft_strlen(argv[1]) - 2], ".s") == 0))
 	{
 		content = ft_open_file(argv[1], &len);
 		if (!content)
-			ft_error_v(2, "sn", "Error: can't read file");
+			close_asm(champ, "Error: can't read file\n");
 		parse_file(content, champ);
 		if (!(compile(champ, argv[1])))
 		{
 			free(content);
-			free_champ(champ);
-			ft_error_v(2, "sn", "Error creating .cor file");
+			close_asm(champ, "Error creating .cor file\n");
 		}
+		free(content);
+		close_asm(champ, "");
 	}
 	else
-		ft_error_v(2, "sn", "Usage: ./asm <file.s>");
-	free(content);
-	free_champ(champ);
+		close_asm(champ, "Usage: ./asm <file.s>\n");
 	return (0);
 }

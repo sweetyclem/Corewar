@@ -3,29 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   champ.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:11:31 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:57:58 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_champ	*new_champ(void)
-{
-	t_champ	*champ;
-
-	if (!(champ = malloc(sizeof(t_champ))))
-		return (NULL);
-	ft_memset(champ, 0, sizeof(*champ));
-	return (champ);
-}
-
 void	close_asm(t_champ *champ, char *str)
 {
 	free_champ(champ);
-	ft_error_v(2, "sn", str);
+	if (str)
+		ft_error_v(2, "s", str);
 	exit(0);
 }
 
