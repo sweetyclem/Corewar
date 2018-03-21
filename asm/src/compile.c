@@ -6,28 +6,39 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/21 15:21:50 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 17:15:11 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-void instr_add(t_instruct *instr, char *buf, int *ibuf)
+void print_dbug(t_instruct *instr)
 {
-	char conf;
 	int i;
 
-	//
-	// i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
+	i = 0;
+	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name,
+		instr->opcode,
+		instr->address);
+	while (i < MAX_ARGS_NUMBER)
+	{
+		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n",
+			instr->params[i].type,
+			instr->params[i].value,
+			instr->params[i].raw_value,
+			instr->params[i].nb_bytes);
+		++i;
+	}
+}
+
+char get_opc(t_instruct *instr)
+{
+	int i;
+	char conf;
+
 	i = 0;
 	conf = 0;
-	while (i < 4)
+	while (i < MAX_ARGS_NUMBER)
 	{
 		if (instr->params[i].type == T_REG)
 			conf |= OCP_REG;
@@ -41,6 +52,19 @@ void instr_add(t_instruct *instr, char *buf, int *ibuf)
 			conf = conf << 2;
 		++i;
 	}
+	return (conf);
+}
+
+
+
+void instr_add(t_instruct *instr, char *buf, int *ibuf)
+{
+	char conf;
+
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -55,32 +79,11 @@ void instr_add(t_instruct *instr, char *buf, int *ibuf)
 void instr_and(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	//
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -95,31 +98,11 @@ void instr_and(t_instruct *instr, char *buf, int *ibuf)
 void instr_or(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	i = 0;
-	//
-	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	while (i < MAX_ARGS_NUMBER)
-	{
-		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-		++i;
-	}
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -135,24 +118,11 @@ void instr_or(t_instruct *instr, char *buf, int *ibuf)
 void instr_sub(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -168,31 +138,11 @@ void instr_sub(t_instruct *instr, char *buf, int *ibuf)
 void instr_sti(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	//
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &instr->opcode, 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -242,34 +192,10 @@ void instr_st(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
 
-	///
-	int i = 0;
-	ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	while (i < MAX_ARGS_NUMBER)
-	{
-
-		ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-		++i;
-	}
-	//
-
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
-
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -283,29 +209,16 @@ void instr_st(t_instruct *instr, char *buf, int *ibuf)
 void instr_ld(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
 	*ibuf += 1;
-	ft_memcpy(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes);
+	ft_memcpy_rev(buf + *ibuf, &(instr->params[0].value), instr->params[0].nb_bytes - 1);
 	*ibuf +=  instr->params[0].nb_bytes;
 	ft_memcpy(buf + *ibuf, &(instr->params[1].value), instr->params[1].nb_bytes);
 	*ibuf +=  instr->params[1].nb_bytes;
@@ -322,32 +235,11 @@ void instr_live(t_instruct *instr, char *buf, int *ibuf)
 void instr_xor(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	// //
-	// i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -362,32 +254,11 @@ void instr_xor(t_instruct *instr, char *buf, int *ibuf)
 void instr_ldi(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	// //
-	// i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -403,32 +274,11 @@ void instr_ldi(t_instruct *instr, char *buf, int *ibuf)
 void instr_lld(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	// //
-	// i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -443,32 +293,11 @@ void instr_lld(t_instruct *instr, char *buf, int *ibuf)
 void instr_lldi(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	// //
-	// i = 0;
-	// ft_printf("name %s | opcode : %x | addr: %x\n", instr->name, instr->opcode, instr->address);
-	// while (i < MAX_ARGS_NUMBER)
-	// {
-	// 	ft_printf("\t type %d | value : %x | raw_val: %s | n_byte %d\n", instr->params[i].type, instr->params[i].value, instr->params[i].raw_value, instr->params[i].nb_bytes);
-	// 	++i;
-	// }
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -500,24 +329,11 @@ void instr_lfork(t_instruct *instr, char *buf, int *ibuf)
 void instr_aff(t_instruct *instr, char *buf, int *ibuf)
 {
 	char conf;
-	int i;
 
-	i = 0;
-	conf = 0;
-	while (i < 4)
-	{
-		if (instr->params[i].type == T_REG)
-			conf |= OCP_REG;
-		else if (instr->params[i].type == T_DIR)
-			conf |= OCP_DIR;
-		else if (instr->params[i].type == T_IND)
-			conf |= OCP_IND;
-		else if (instr->params[i].type == T_LAB)
-			conf |= OCP_DIR;
-		if (i < 3)
-			conf = conf << 2;
-		++i;
-	}
+	if (DBUG)
+		print_dbug(instr);
+	if (g_op_tab[instr->opcode].has_opc)
+		conf = get_opc(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
 	*ibuf += 1;
 	ft_memcpy(buf + *ibuf, &conf, 1);
@@ -570,14 +386,46 @@ void write_prog(t_champ *champ, char *buf, int *ibuf)
 	}
 }
 
+int calc_param_size(t_instruct *instr)
+{
+	int i;
+	int res;
+
+	res = 0;
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		res += instr->params[i].nb_bytes;
+		++i;
+	}
+	return (res);
+}
+
+int get_progsize(t_champ *champ)
+{
+	t_instruct *instr;
+	int			size;
+
+	size = 0;
+	instr = champ->instructs;
+	while (instr)
+	{
+		size += 1 + calc_param_size(instr);
+		if (g_op_tab[instr->opcode].has_opc)
+			++size;
+		instr = instr->next;
+	}
+	return (size);
+}
+
 char wrt_file(int fd, t_champ *champ)
 {
-	char	*buf;
-	int 	ibuf;
-	char 	*val;
-	int 	fd_n_x;
+	char		*buf;
+	int			ibuf;
+	long int 	val;
+	int			fd_n_x;
 
-	val = (char*)COREWAR_EXEC_MAGIC;
+	val = COREWAR_EXEC_MAGIC;
 	errno = 0;
 	if (!(buf = (char*)ft_memalloc(sizeof(char) * BUFF_SIZE_2_16)))
 		return (ft_error_c(2, "RFLsnE", FFL, "Error Malloc", ER));
@@ -589,9 +437,12 @@ char wrt_file(int fd, t_champ *champ)
 	fd_n_x |= fd ;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 	// ecrire longueur programme ici //
-	fd_n_x = 8 << 16;
-	fd_n_x |= fd ;
-	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
+	val = get_progsize(champ);
+	ft_memcpy_rev(buf + ibuf, &val, 7);
+	ibuf += 8;
+	// fd_n_x = 8 << 16;
+	// fd_n_x |= fd ;
+	// ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 	//
 	ft_putbuf_fd_np(fd, champ->comment, buf, &ibuf);
 	fd_n_x = ((COMMENT_LENGTH - ft_strlen(champ->comment)) + 4) << 16;
