@@ -54,6 +54,8 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 	{
 		instruct = new_instruct();
 		instruct->name = ft_strndup(line, i);
+		if (find_op(instruct->name) == 0)
+			close_asm(champ, "Error: unknown instruction");
 		instruct->opcode = find_op(instruct->name);
 		line = &line[i];
 		instruct->address = nb_bytes;
