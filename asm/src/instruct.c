@@ -85,7 +85,7 @@ void		free_instructs(t_instruct *instructs)
 	free(instructs);
 }
 
-int		calc_param_size(t_instruct *instr)
+int		params_size(t_instruct *instr)
 {
 	int	i;
 	int res;
