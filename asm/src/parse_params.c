@@ -44,7 +44,7 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 			if (!str_is_digits(&param->raw_value[1])
 			|| ft_atoi(&param->raw_value[1]) > REG_NUMBER
 			|| ft_atoi(&param->raw_value[1]) < 1)
-				close_asm(c, "Error: wrong format for reg param");
+				close_asm(c, "Error: wrong format for reg param\n");
 			param->value = ft_atoi(&param->raw_value[1]);
 		}
 		else if (param->type == T_DIR)
@@ -72,7 +72,7 @@ void	get_param_type(t_champ *c, t_param *param)
 	|| ft_isdigit(param->raw_value[0])))
 		param->type = T_IND;
 	else
-		close_asm(c, "Error: unknown param type");
+		close_asm(c, "Error: unknown param type\n");
 }
 
 int		get_nb_bytes(t_instruct *instruct)
