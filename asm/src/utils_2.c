@@ -71,21 +71,6 @@ char	get_opc(t_instruct *instr)
 	return (conf);
 }
 
-int		calc_param_size(t_instruct *instr)
-{
-	int	i;
-	int res;
-
-	res = 0;
-	i = 0;
-	while (i < MAX_ARGS_NUMBER)
-	{
-		res += instr->params[i].nb_bytes;
-		++i;
-	}
-	return (res);
-}
-
 int		get_progsize(t_champ *champ)
 {
 	t_instruct	*instr;

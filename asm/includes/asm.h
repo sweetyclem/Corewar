@@ -25,11 +25,14 @@ typedef void	(*t_tab_instr)(t_instruct*, char*, int*);
 void		parse_file(char *content, t_champ *champ);
 char		*parse_header(char *content, t_champ *champ);
 void		parse_body(char *content, t_champ *champ);
-int			get_param(t_instruct *inst, char *line);
+int			get_param(t_champ *c, t_instruct *inst, char *line);
 void		param_value(t_param *param, int inst_addr, t_champ *c);
+int			get_instruct(t_champ *champ, char *line, int nb_bytes);
 int			get_label_addr(t_label *labels, char *name);
+char		*save_label_name(t_champ *champ, char *line, int nb_bytes);
 int			calc_label(t_param *param, int inst_addr, t_champ *c);
 int			check_params(t_instruct *inst);
+int			calc_param_size(t_instruct *instr);
 
 /*
 ** Compiling
@@ -62,13 +65,12 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct);
 char		*ft_skip_whitespace(char *str);
 char		*point_to_next_line(char *str);
 char		*cut_first_line(char *str);
+int			str_is_digits(char *str);
 char		*skip_comment_and_whitespace(char *content);
 char		*trim_comment(char *line);
 int			find_op(char *name);
-int			str_is_digits(char *str);
 void		print_dbug(t_instruct *instr);
 char		get_opc(t_instruct *instr);
-int			calc_param_size(t_instruct *instr);
 int			get_progsize(t_champ *champ);
 
 #endif

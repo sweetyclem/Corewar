@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-static void	write_intr(t_instruct *instr, char *buf, int *ibuf)
+static void	write_instr(t_instruct *instr, char *buf, int *ibuf)
 {
 	char	conf;
 	int		i;
@@ -47,7 +47,7 @@ static void	write_prog(t_champ *champ, char *buf, int *ibuf)
 	instr = champ->instructs;
 	while (instr)
 	{
-		write_intr(instr, buf, ibuf);
+		write_instr(instr, buf, ibuf);
 		instr = instr->next;
 	}
 }

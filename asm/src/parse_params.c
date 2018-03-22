@@ -64,14 +64,17 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 	}
 }
 
-void	get_param_type(t_param *param)
+void	get_param_type(t_champ *c, t_param *param)
 {
 	if (param->raw_value && param->raw_value[0] == 'r')
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)
 		param->type = T_DIR;
-	else if (param->raw_value)
+	else if (param->raw_value && (param->raw_value[0] == '-' 
+	|| ft_isdigit(param->raw_value[0])))
 		param->type = T_IND;
+	else
+		close_asm(c, "Error: unknown param type");
 }
 
 int		get_nb_bytes(t_instruct *instruct)
@@ -103,7 +106,7 @@ int		get_nb_bytes(t_instruct *instruct)
 	return (nb_bytes);
 }
 
-int		get_param(t_instruct *inst, char *line)
+int		get_param(t_champ *c, t_instruct *inst, char *line)
 {
 	char	**split;
 	int		i;
@@ -117,7 +120,7 @@ int		get_param(t_instruct *inst, char *line)
 	{
 		inst->params[i].raw_value = ft_strdup(ft_strtrim_both(split[i]));
 		free(split[i]);
-		get_param_type(&inst->params[i]);
+		get_param_type(c, &inst->params[i]);
 		nb_bytes = get_nb_bytes(inst);
 		i++;
 	}

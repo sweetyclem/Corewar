@@ -37,30 +37,26 @@ char	*save_label_name(t_champ *champ, char *line, int nb_bytes)
 	return (line);
 }
 
-int		get_instruct(t_champ *champ, char *line, int nb_bytes)
+char	*skip_comment_and_whitespace(char *content)
 {
-	t_instruct	*instruct;
-	int			i;
-	int			has_opc;
+	content = ft_strtrim_both(content);
+	while (content[0] == COMMENT_CHAR || content[0] == '\n')
+		content = point_to_next_line(content);
+	return (content);
+}
+
+char	*trim_comment(char *line)
+{
+	int	i;
 
 	i = 0;
-	has_opc = 0;
-	line = save_label_name(champ, line, nb_bytes);
-	line = ft_skip_whitespace(line);
-	while (line[i] && line[i] != ' ' && line[i] != '\t')
-		i++;
-	if (line[i] != '\0' && line[i] != '\n')
+	while (line[i])
 	{
-		instruct = new_instruct();
-		instruct->name = ft_strndup(line, i);
-		instruct->opcode = find_op(instruct->name);
-		line = &line[i];
-		instruct->address = nb_bytes;
-		has_opc = g_op_tab[instruct->opcode].has_opc;
-		nb_bytes += 1 + has_opc + get_param(instruct, line);
-		add_instruct_end(champ, instruct);
+		if (line[i] == COMMENT_CHAR)
+			line[i] = '\0';
+		i++;
 	}
-	return (nb_bytes);
+	return (line);
 }
 
 void	parse_body(char *content, t_champ *champ)

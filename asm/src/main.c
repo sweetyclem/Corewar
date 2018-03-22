@@ -25,7 +25,7 @@ int	main(int ac, char **argv)
 	{
 		content = ft_open_file(argv[1], &len);
 		if (!content)
-			close_asm(champ, "Error: can't read file\n");
+			close_asm(champ, "Exiting: can't read file\n");
 		parse_file(content, champ);
 		if (!(compile(champ, argv[1])))
 		{

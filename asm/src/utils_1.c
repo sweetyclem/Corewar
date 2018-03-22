@@ -19,28 +19,6 @@ char	*ft_skip_whitespace(char *str)
 	return (str);
 }
 
-char	*skip_comment_and_whitespace(char *content)
-{
-	content = ft_strtrim_both(content);
-	while (content[0] == COMMENT_CHAR || content[0] == '\n')
-		content = point_to_next_line(content);
-	return (content);
-}
-
-char	*trim_comment(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == COMMENT_CHAR)
-			line[i] = '\0';
-		i++;
-	}
-	return (line);
-}
-
 char	*cut_first_line(char *str)
 {
 	int		i;

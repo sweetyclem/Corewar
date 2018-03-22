@@ -38,6 +38,32 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct)
 	instruct->next = NULL;
 }
 
+int		get_instruct(t_champ *champ, char *line, int nb_bytes)
+{
+	t_instruct	*instruct;
+	int			i;
+	int			has_opc;
+
+	i = 0;
+	has_opc = 0;
+	line = save_label_name(champ, line, nb_bytes);
+	line = ft_skip_whitespace(line);
+	while (line[i] && line[i] != ' ' && line[i] != '\t')
+		i++;
+	if (line[i] != '\0' && line[i] != '\n')
+	{
+		instruct = new_instruct();
+		instruct->name = ft_strndup(line, i);
+		instruct->opcode = find_op(instruct->name);
+		line = &line[i];
+		instruct->address = nb_bytes;
+		has_opc = g_op_tab[instruct->opcode].has_opc;
+		nb_bytes += 1 + has_opc + get_param(champ, instruct, line);
+		add_instruct_end(champ, instruct);
+	}
+	return (nb_bytes);
+}
+
 void		free_instructs(t_instruct *instructs)
 {
 	t_instruct	*tmp_instruct;
@@ -57,4 +83,19 @@ void		free_instructs(t_instruct *instructs)
 		free(tmp_instruct);
 	}
 	free(instructs);
+}
+
+int		calc_param_size(t_instruct *instr)
+{
+	int	i;
+	int res;
+
+	res = 0;
+	i = 0;
+	while (i < MAX_ARGS_NUMBER)
+	{
+		res += instr->params[i].nb_bytes;
+		++i;
+	}
+	return (res);
 }
