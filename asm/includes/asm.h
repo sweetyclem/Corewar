@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 17:17:26 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:03:23 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft.h"
 # include "struct.h"
+# include "op.h"
 
 typedef void	(*t_tab_instr)(t_instruct*, char*, int*);
 
@@ -38,7 +39,6 @@ char		compile(t_champ *champ, char *path);
 /*
 ** Create Structures
 */
-t_champ		*new_champ(void);
 t_label		*new_label(void);
 t_instruct	*new_instruct(void);
 void		close_asm(t_champ *champ, char *str);
@@ -66,5 +66,9 @@ char		*skip_comment_and_whitespace(char *content);
 char		*trim_comment(char *line);
 int			find_op(char *name);
 int			str_is_digits(char *str);
+void		print_dbug(t_instruct *instr);
+char		get_opc(t_instruct *instr);
+int			calc_param_size(t_instruct *instr);
+int			get_progsize(t_champ *champ);
 
 #endif

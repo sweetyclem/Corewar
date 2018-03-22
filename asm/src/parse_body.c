@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_body.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:07:12 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:56:36 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ void	parse_body(char *content, t_champ *champ)
 	while (inst)
 	{
 		i = 0;
-		ft_printf("instruction : %s\n", inst->name);
+		// ft_printf("instruction : %s\n", inst->name);
 		while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
 			param_value(&inst->params[i++], inst->address, champ);
 		if (!(check_params(inst)))
-			close_asm(champ, "Error: wrong parameters for instruction");
+			close_asm(champ, "Error: wrong parameters for instruction\n");
 		inst = inst->next;
 	}
 }

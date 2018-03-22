@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:48:32 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/19 16:58:13 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:08:19 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	*ft_memcpy_rev(void *dst, const void *src, size_t n)
 {
 	unsigned char	*d;
 	unsigned char	*s;
-	size_t				i;
+	size_t			i;
 
 	i = 0;
 	d = (unsigned char *)dst;

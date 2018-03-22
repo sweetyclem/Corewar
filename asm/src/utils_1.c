@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 11:25:06 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 17:17:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 19:01:05 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <fcntl.h>
 
 char	*ft_skip_whitespace(char *str)
 {
@@ -63,20 +62,4 @@ char	*point_to_next_line(char *str)
 	else
 		str = "\0";
 	return (str);
-}
-
-int		str_is_digits(char *str)
-{
-	int i;
-
-	i = 0;
-	if (str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if (!ft_isdigit(str[i]))
-			return (0);
-		i++;
-	}
-	return (1);
 }

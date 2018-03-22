@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   label.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 14:47:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:56:19 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		calc_label(t_param *param, int inst_addr, t_champ *c)
 	res = 0;
 	if (!(label = ft_strdup(ft_strchr(param->raw_value, LABEL_CHAR) + 1))
 	|| get_label_addr(c->labels, label) == -1)
-		close_asm(c, "Error: non existent label");
+		close_asm(c, "Error: non existent label\n");
 	if (inst_addr > get_label_addr(c->labels, label))
 		res = get_label_addr(c->labels, label) - inst_addr;
 	else

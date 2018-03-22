@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/21 14:47:47 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/21 18:56:57 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 		else if (param->type == T_DIR)
 		{
 			if (!str_is_digits(&param->raw_value[1]))
-				close_asm(c, "Error: direct param must have only numbers");
+				close_asm(c, "Error: direct param must have only numbers\n");
 			param->value = ft_atoi(&param->raw_value[1]);
 		}
 		else if (param->type == T_IND)
 		{
 			if (!str_is_digits(param->raw_value))
-				close_asm(c, "Error: indirect param must have only numbers");
+				close_asm(c, "Error: indirect param must have only numbers\n");
 			param->value = ft_atoi(param->raw_value);
 		}
 	}

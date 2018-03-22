@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/20 16:13:18 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/21 18:56:43 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ char	*parse_header(char *content, t_champ *champ)
 	champ->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	content = skip_comment_and_whitespace(content);
 	if (!champ->name || !champ->comment)
-		close_asm(champ, "Error: champ needs to have a comment, even empty");
+		close_asm(champ, "Error: champ needs to have a comment, even empty\n");
 	if (ft_strchr(content, '.'))
-		close_asm(champ, "Error: unknown command");
+		close_asm(champ, "Error: unknown command\n");
 	return (content);
 }
