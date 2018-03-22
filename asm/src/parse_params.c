@@ -64,7 +64,6 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 
 void	get_param_type(t_champ *c, t_param *param)
 {
-	ft_printf("value : %s\n", param->raw_value);
 	if (param->raw_value && param->raw_value[0] == 'r')
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)

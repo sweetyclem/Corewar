@@ -48,5 +48,9 @@ char	*parse_header(char *content, t_champ *champ)
 		close_asm(champ, "Error: champ needs to have a comment, even empty\n");
 	if (ft_strchr(content, '.'))
 		close_asm(champ, "Error: unknown command\n");
+	if (ft_strlen(champ->name) >= PROG_NAME_LENGTH)
+		close_asm(champ, "Error: champion's name is too long\n");
+	if (ft_strlen(champ->comment) >= COMMENT_LENGTH)
+		close_asm(champ, "Error: champion's comment is too long\n");
 	return (content);
 }
