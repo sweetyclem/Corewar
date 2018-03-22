@@ -30,7 +30,7 @@ void		param_value(t_param *param, int inst_addr, t_champ *c);
 int			get_instruct(t_champ *champ, char *line, int nb_bytes);
 int			get_label_addr(t_label *labels, char *name);
 char		*save_label_name(t_champ *champ, char *line, int nb_bytes);
-int			calc_label(t_param *param, int inst_addr, t_champ *c);
+int			label_value(t_param *param, int inst_addr, t_champ *c);
 int			check_params(t_instruct *inst);
 int			params_size(t_instruct *instr);
 

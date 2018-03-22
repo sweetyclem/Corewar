@@ -36,7 +36,7 @@ int		get_label_addr(t_label *labels, char *name)
 	return (-1);
 }
 
-int		calc_label(t_param *param, int inst_addr, t_champ *c)
+int		label_value(t_param *param, int inst_addr, t_champ *c)
 {
 	char	*label;
 	int		res;

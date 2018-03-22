@@ -38,7 +38,7 @@ int		check_params(t_instruct *inst)
 void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
 	if (ft_strchr(param->raw_value, LABEL_CHAR))
-		param->value = calc_label(param, inst_addr, c);
+		param->value = label_value(param, inst_addr, c);
 	else if (!ft_strchr(param->raw_value, LABEL_CHAR))
 	{
 		if (param->type == T_REG)
