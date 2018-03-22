@@ -39,3 +39,7 @@ asm/asm.dSYM/Contents/Resources/DWARF/asm
 .conf_v_code
 *.cor
 ressources/champs/*.cor
+ressources/tests/testasm42
+ressources/tests/testasm
+ressources/tests/asmHugo
+ressources/tests/asm
