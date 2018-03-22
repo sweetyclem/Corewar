@@ -71,6 +71,9 @@ void	parse_body(char *content, t_champ *champ)
 	{
 		content = skip_comment_and_whitespace(content);
 		line = cut_first_line(content);
+		line = trim_comment(line);
+		if (ft_strchr(line, '.'))
+			close_asm(champ, "Error: unknown command\n");
 		content = point_to_next_line(content);
 		nb_bytes = get_instruct(champ, line, nb_bytes);
 		free(line);

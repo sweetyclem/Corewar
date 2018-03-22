@@ -110,7 +110,6 @@ int		get_param(t_champ *c, t_instruct *inst, char *line)
 	int		i;
 	int		nb_bytes;
 
-	line = trim_comment(line);
 	split = ft_strsplit(line, SEPARATOR_CHAR);
 	i = 0;
 	nb_bytes = 0;

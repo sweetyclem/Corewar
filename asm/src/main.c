@@ -33,7 +33,7 @@ int	main(int ac, char **argv)
 			close_asm(champ, "Error creating .cor file\n");
 		}
 		free(content);
-		close_asm(champ, "\n");
+		close_asm(champ, "");
 	}
 	else
 		close_asm(champ, "Usage: ./asm <file.s>\n");
