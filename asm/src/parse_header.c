@@ -33,7 +33,7 @@ char	*get_name_or_comment(char **content, char *str)
 		while ((*content)[i] && (*content)[i] != '"')
 			i++;
 		result = ft_strndup(*content, i);
-		*content = point_to_next_line(*content);
+		*content = point_to_next_line(&(*content)[i]);
 	}
 	return (result);
 }

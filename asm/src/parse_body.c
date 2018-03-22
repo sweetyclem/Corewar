@@ -84,7 +84,6 @@ void	parse_body(char *content, t_champ *champ)
 	while (inst)
 	{
 		i = 0;
-		// ft_printf("instruction : %s\n", inst->name);
 		while (i < MAX_ARGS_NUMBER && inst->params[i].raw_value)
 			param_value(&inst->params[i++], inst->address, champ);
 		if (!(check_params(inst)))

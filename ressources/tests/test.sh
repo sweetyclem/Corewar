@@ -44,4 +44,4 @@ N=`echo ../champs/ultimate-surrender` S=`echo $N.s` COR=`echo $N.cor` && ./asm $
 N=`echo ../champs/while_fork` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ./asmHugo $S && hexdump $COR > testasmHugo && diff testasm testasmHugo
 N=`echo ../champs/youforkmytralala` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ./asmHugo $S && hexdump $COR > testasmHugo && diff testasm testasmHugo
 N=`echo ../champs/zork` S=`echo $N.s` COR=`echo $N.cor` && ./asm $S && hexdump $COR > testasm && ./asmHugo $S && hexdump $COR > testasmHugo && diff testasm testasmHugo
-rm ../champs/*.cor
+#rm ../champs/*.cor
