@@ -20,7 +20,7 @@ char	*save_label_name(t_champ *champ, char *line, int nb_bytes)
 
 	i = 0;
 	j = ft_strchr_i(line, LABEL_CHAR);
-	while (line[i] && line[i] != COMMENT_CHAR)
+	while (line[i] && line[i] != COMMENT_CHAR && line[i] != ';')
 	{
 		if (i == (j - 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
@@ -37,12 +37,12 @@ char	*save_label_name(t_champ *champ, char *line, int nb_bytes)
 	return (line);
 }
 
-char	*skip_comment_and_whitespace(char *content)
+char	*skip_comment_and_whitespace(char *str)
 {
-	content = ft_strtrim_both(content);
-	while (content[0] == COMMENT_CHAR || content[0] == '\n')
-		content = point_to_next_line(content);
-	return (content);
+	str = ft_strtrim_both(str);
+	while (str[0] == COMMENT_CHAR || str[0] == '\n' || str[0] == ';')
+		str = point_to_next_line(str);
+	return (str);
 }
 
 char	*trim_comment(char *line)
@@ -52,7 +52,7 @@ char	*trim_comment(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == COMMENT_CHAR)
+		if (line[i] == COMMENT_CHAR || line[i] == ';')
 			line[i] = '\0';
 		i++;
 	}

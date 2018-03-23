@@ -45,7 +45,7 @@ char	*parse_header(char *content, t_champ *champ)
 	champ->comment = get_name_or_comment(&content, COMMENT_CMD_STRING);
 	content = skip_comment_and_whitespace(content);
 	if (!champ->name || !champ->comment)
-		close_asm(champ, "Error: champ needs to have a comment, even empty\n");
+		close_asm(champ, "Error: champ needs to have a name and a comment\n");
 	if (ft_strlen(champ->name) >= PROG_NAME_LENGTH)
 		close_asm(champ, "Error: champion's name is too long\n");
 	if (ft_strlen(champ->comment) >= COMMENT_LENGTH)
