@@ -44,3 +44,6 @@ ressources/tests/testasm
 ressources/tests/asmHugo
 ressources/tests/asm
 ressources/tests/testasmHugo
+ressources/tests/leaks.txt
+ressources/tests/asm.dSYM/Contents/Info.plist
+ressources/tests/asm.dSYM/Contents/Resources/DWARF/asm
