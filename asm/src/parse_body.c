@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_body.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/21 18:56:36 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/26 11:29:38 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ char	*save_label_name(t_champ *champ, char *line, int nb_bytes)
 		if (i == (j - 1) && ft_strchr(LABEL_CHARS, line[i]))
 		{
 			label = new_label();
-			label->name = ft_strndup(line, j);
+			if (!(label->name = ft_strndup(line, j)))
+				close_asm(champ, "Malloc error\n");
 			label->address = nb_bytes;
 			if (champ)
 				add_label_end(champ, label);

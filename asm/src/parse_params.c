@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 09:43:39 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/26 13:00:37 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,14 @@ int		get_param(t_champ *c, t_instruct *inst, char *line)
 	int		i;
 	int		nb_bytes;
 
-	split = ft_strsplit(line, SEPARATOR_CHAR);
+	if (!(split = ft_strsplit(line, SEPARATOR_CHAR)))
+		close_asm(champ, "Malloc Error\n");
 	i = 0;
 	nb_bytes = 0;
 	while (split[i] && i < MAX_ARGS_NUMBER)
 	{
-		inst->params[i].raw_value = ft_strdup(ft_strtrim_both(split[i]));
+		if (!(inst->params[i].raw_value = ft_strdup(ft_strtrim_both(split[i]))))
+			close_asm(champ, "Malloc error\n");
 		free(split[i]);
 		get_param_type(c, &inst->params[i]);
 		nb_bytes = get_nb_bytes(inst);
