@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apopinea <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:00:39 by apopinea          #+#    #+#             */
-/*   Updated: 2017/11/25 15:00:40 by apopinea         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:43:44 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,27 @@ char		*ft_get_line(char *s, int *i)
 	s2 = ft_strndup(s + *i, j - *i);
 	*i = j + 1;
 	return (s2);
+}
+
+char	*ft_cut_first_line(char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '\n')
+		i++;
+	str = ft_strsub(str, 0, i);
+	return (str);
+}
+
+char	*ft_point_to_next_line(char *str)
+{
+	char	*next;
+
+	next = ft_strchr(str, '\n');
+	if (next && next + 1)
+		str = next + 1;
+	else
+		str = "\0";
+	return (str);
 }

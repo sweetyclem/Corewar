@@ -6,7 +6,7 @@
 #    By: trichert <trichert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/13 09:01:39 by cpirlot           #+#    #+#              #
-#    Updated: 2018/03/21 19:00:37 by trichert         ###   ########.fr        #
+#    Updated: 2018/03/26 16:46:08 by trichert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ SRC			= champ.c 		\
 			parse_body.c	\
 			parse_header.c	\
 			parse_params.c  \
-			utils_1.c		\
-			utils_2.c
+			util.c
 
 DIR_INC 	= includes/
 INCS 		= asm.h \

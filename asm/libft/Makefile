@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+         #
+#    By: trichert <trichert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/04 11:05:55 by apopinea          #+#    #+#              #
-#    Updated: 2018/03/19 08:28:30 by cpirlot          ###   ########.fr        #
+#    Updated: 2018/03/26 16:48:32 by trichert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -258,6 +258,8 @@ SRCS_STR =		ft_cmpt_chr.c 			\
 				ft_low_case.c			\
 				ft_print_next_line.c	\
 				ft_scitoa.c 			\
+				ft_skip_whitespace.c 	\
+				ft_str_isdigits.c 		\
 				ft_str_next_line.c		\
 				ft_itoa_base.c			\
 				ft_strcat.c 			\

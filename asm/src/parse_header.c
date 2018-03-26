@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 12:51:28 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/26 16:45:07 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_name_or_comment(t_champ *c, char **content, char *str)
 			i++;
 		if (!(result = ft_strndup(*content, i)))
 			close_asm(c, "Malloc error\n");
-		*content = point_to_next_line(&(*content)[i]);
+		*content = ft_point_to_next_line(&(*content)[i]);
 	}
 	return (result);
 }
