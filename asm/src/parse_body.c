@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 11:29:38 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/26 16:32:55 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ void	parse_body(char *content, t_champ *champ)
 	while (content)
 	{
 		content = skip_comment_and_whitespace(content);
-		line = cut_first_line(content);
+		if (!(line = cut_first_line(content)))
+			close_asm(champ, "Malloc error\n");
 		line = trim_comment(line);
 		if (ft_strchr(line, '.'))
 			close_asm(champ, "Error: unknown command\n");
