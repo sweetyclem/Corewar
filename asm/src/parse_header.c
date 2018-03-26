@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_header.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/21 18:56:43 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/26 09:46:58 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	parse_file(char *content, t_champ *champ)
 	content = parse_header(content, champ);
 	content = skip_comment_and_whitespace(content);
 	parse_body(content, champ);
+	if (!champ->instructs && !champ->labels)
+		close_asm(champ, "Error: no instruction or label\n");
 }
 
 char	*get_name_or_comment(char **content, char *str)
