@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_params.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/21 18:56:57 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/26 09:43:39 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int		check_params(t_instruct *inst)
 
 void	param_value(t_param *param, int inst_addr, t_champ *c)
 {
-	if (ft_strchr(param->raw_value, LABEL_CHAR))
+	if (param->raw_value[0] == LABEL_CHAR || param->raw_value[1] == LABEL_CHAR)
 		param->value = label_value(param, inst_addr, c);
-	else if (!ft_strchr(param->raw_value, LABEL_CHAR))
+	else
 	{
 		if (param->type == T_REG)
 		{
