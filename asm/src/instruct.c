@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/19 13:55:03 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/26 17:04:34 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 	if (line[i] != '\0' && line[i] != '\n')
 	{
 		instruct = new_instruct();
-		instruct->name = ft_strndup(line, i);
+		if (!(instruct->name = ft_strndup(line, i)))
+			close_asm(champ, "Malloc error\n");
 		if (find_op(instruct->name) == 0)
 			close_asm(champ, "Error: unknown instruction\n");
 		instruct->opcode = find_op(instruct->name);
