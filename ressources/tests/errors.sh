@@ -11,6 +11,8 @@ echo "\nWrong param type-------"
 ./asm ../champs/errors/bad_param_type.s
 echo "\nBad character in param-------"
 ./asm ../champs/errors/bad_char_in_param.s
+echo "\nBad character in label-------"
+./asm ../champs/errors/bad_char_in_label.s
 echo "\nNonexistent label-------"
 ./asm ../champs/errors/nonexistent_label.s
 echo "\nNo code-------"
