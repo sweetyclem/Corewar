@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:44:40 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 14:58:08 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/27 11:27:33 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 	{
 		if (param->type == T_REG)
 		{
-			if (!str_is_digits(&param->raw_value[1])
+			if (!ft_str_is_digits(&param->raw_value[1])
 			|| ft_atoi(&param->raw_value[1]) > REG_NUMBER
 			|| ft_atoi(&param->raw_value[1]) < 1)
 				close_asm(c, "Error: wrong format for reg param\n");
@@ -49,13 +49,13 @@ void	param_value(t_param *param, int inst_addr, t_champ *c)
 		}
 		else if (param->type == T_DIR)
 		{
-			if (!str_is_digits(&param->raw_value[1]))
+			if (!ft_str_is_digits(&param->raw_value[1]))
 				close_asm(c, "Error: direct param must have only numbers\n");
 			param->value = ft_atoi(&param->raw_value[1]);
 		}
 		else if (param->type == T_IND)
 		{
-			if (!str_is_digits(param->raw_value))
+			if (!ft_str_is_digits(param->raw_value))
 				close_asm(c, "Error: indirect param must have only numbers\n");
 			param->value = ft_atoi(param->raw_value);
 		}
@@ -68,7 +68,7 @@ void	get_param_type(t_champ *c, t_param *param)
 		param->type = T_REG;
 	else if (param->raw_value && param->raw_value[0] == DIRECT_CHAR)
 		param->type = T_DIR;
-	else if (param->raw_value && (param->raw_value[0] == '-' 
+	else if (param->raw_value && (param->raw_value[0] == '-'
 	|| ft_isdigit(param->raw_value[0]) || param->raw_value[0] == LABEL_CHAR))
 		param->type = T_IND;
 	else

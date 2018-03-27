@@ -6,7 +6,7 @@
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:12:55 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/21 19:03:23 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:45:21 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct);
 /*
 ** Utils
 */
-char		*ft_skip_whitespace(char *str);
-char		*point_to_next_line(char *str);
-char		*cut_first_line(char *str);
-int			str_is_digits(char *str);
 char		*skip_comment_and_whitespace(char *str);
 char		*trim_comment(char *line);
 int			find_op(char *name);

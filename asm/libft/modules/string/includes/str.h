@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   str.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apopinea <apopinea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:00:10 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/05 14:23:42 by apopinea         ###   ########.fr       */
+/*   Updated: 2018/03/26 16:44:08 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 
 # define BUFF_SIZE 1000
 
+int					ft_str_is_digits(char *str);
+char				*ft_skip_whitespace(char *str);
+char				*ft_cut_first_line(char *str);
+char				*ft_point_to_next_line(char *str);
 char				*ft_get_line(char *s, int *i);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strcpy(char *dst, const char *src);

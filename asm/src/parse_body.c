@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 16:32:55 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/27 11:27:16 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ char	*skip_comment_and_whitespace(char *str)
 {
 	str = ft_strtrim_both(str);
 	while (str[0] == COMMENT_CHAR || str[0] == '\n' || str[0] == ';')
-		str = point_to_next_line(str);
+		str = ft_point_to_next_line(str);
 	return (str);
 }
 
@@ -71,12 +71,11 @@ void	parse_body(char *content, t_champ *champ)
 	while (content)
 	{
 		content = skip_comment_and_whitespace(content);
-		if (!(line = cut_first_line(content)))
-			close_asm(champ, "Malloc error\n");
+		line = ft_cut_first_line(content);
 		line = trim_comment(line);
 		if (ft_strchr(line, '.'))
 			close_asm(champ, "Error: unknown command\n");
-		content = point_to_next_line(content);
+		content = ft_point_to_next_line(content);
 		nb_bytes = get_instruct(champ, line, nb_bytes);
 		free(line);
 		if (content[0] == '\0')
