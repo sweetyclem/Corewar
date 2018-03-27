@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/26 17:04:34 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/27 10:48:44 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 	has_opc = 0;
 	line = save_label_name(champ, line, nb_bytes);
 	line = ft_skip_whitespace(line);
-	while (line[i] && line[i] != ' ' && line[i] != '\t')
+	while (line[i] && !ft_strchr(" \t-", line[i]) 
+	&& line[i] != DIRECT_CHAR && line[i] != LABEL_CHAR && !ft_isdigit(line[i]))
 		i++;
 	if (line[i] != '\0' && line[i] != '\n')
 	{
 		instruct = new_instruct();
 		if (!(instruct->name = ft_strndup(line, i)))
 			close_asm(champ, "Malloc error\n");
-		if (find_op(instruct->name) == 0)
-			close_asm(champ, "Error: unknown instruction\n");
+		if (!find_op(instruct->name))
+			close_asm(champ, "Error: bad char in instruction or label\n");
 		instruct->opcode = find_op(instruct->name);
 		line = &line[i];
 		instruct->address = nb_bytes;
