@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/28 12:56:23 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/28 13:49:05 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	parse_body(char *content, t_champ *champ)
 			close_asm(champ, "Error: unknown command\n");
 		content = ft_point_to_next_line(content);
 		nb_bytes = get_instruct(champ, line, nb_bytes);
+		if (nb_bytes > CHAMP_MAX_SIZE)
+			close_asm(champ, "Error: champ is too large\n");
 		free(line);
 	}
 	parse_params(champ);
