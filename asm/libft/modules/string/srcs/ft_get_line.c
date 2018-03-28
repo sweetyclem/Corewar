@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_get_line.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 15:00:39 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/26 16:43:44 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/28 11:12:58 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "p_str.h"
 
-char		*ft_get_line(char *s, int *i)
+char	*ft_get_line(char *s, int *i)
 {
 	int		j;
 	char	*s2;

@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 09:33:29 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/27 11:27:16 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/28 12:56:23 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,27 +60,11 @@ char	*trim_comment(char *line)
 	return (line);
 }
 
-void	parse_body(char *content, t_champ *champ)
+void	parse_params(t_champ *champ)
 {
-	char		*line;
-	int			nb_bytes;
 	t_instruct	*inst;
 	int			i;
 
-	nb_bytes = 0;
-	while (content)
-	{
-		content = skip_comment_and_whitespace(content);
-		line = ft_cut_first_line(content);
-		line = trim_comment(line);
-		if (ft_strchr(line, '.'))
-			close_asm(champ, "Error: unknown command\n");
-		content = ft_point_to_next_line(content);
-		nb_bytes = get_instruct(champ, line, nb_bytes);
-		free(line);
-		if (content[0] == '\0')
-			break ;
-	}
 	inst = champ->instructs;
 	while (inst)
 	{
@@ -91,4 +75,23 @@ void	parse_body(char *content, t_champ *champ)
 			close_asm(champ, "Error: wrong parameters for instruction\n");
 		inst = inst->next;
 	}
+}
+
+void	parse_body(char *content, t_champ *champ)
+{
+	char		*line;
+	int			nb_bytes;
+
+	nb_bytes = 0;
+	while (content[0])
+	{
+		content = skip_comment_and_whitespace(content);
+		line = trim_comment(ft_cut_first_line(content));
+		if (ft_strchr(line, '.'))
+			close_asm(champ, "Error: unknown command\n");
+		content = ft_point_to_next_line(content);
+		nb_bytes = get_instruct(champ, line, nb_bytes);
+		free(line);
+	}
+	parse_params(champ);
 }

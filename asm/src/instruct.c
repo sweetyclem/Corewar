@@ -6,7 +6,7 @@
 /*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 15:18:19 by cpirlot           #+#    #+#             */
-/*   Updated: 2018/03/27 10:48:44 by cpirlot          ###   ########.fr       */
+/*   Updated: 2018/03/28 11:24:39 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		add_instruct_end(t_champ *champ, t_instruct *instruct)
 	instruct->next = NULL;
 }
 
-int		get_instruct(t_champ *champ, char *line, int nb_bytes)
+int			get_instruct(t_champ *champ, char *line, int nb_bytes)
 {
 	t_instruct	*instruct;
 	int			i;
@@ -46,9 +46,8 @@ int		get_instruct(t_champ *champ, char *line, int nb_bytes)
 
 	i = 0;
 	has_opc = 0;
-	line = save_label_name(champ, line, nb_bytes);
-	line = ft_skip_whitespace(line);
-	while (line[i] && !ft_strchr(" \t-", line[i]) 
+	line = ft_skip_whitespace(save_label_name(champ, line, nb_bytes));
+	while (line[i] && !ft_strchr(" \t-", line[i])
 	&& line[i] != DIRECT_CHAR && line[i] != LABEL_CHAR && !ft_isdigit(line[i]))
 		i++;
 	if (line[i] != '\0' && line[i] != '\n')
@@ -89,7 +88,7 @@ void		free_instructs(t_instruct *instructs)
 	free(instructs);
 }
 
-int		params_size(t_instruct *instr)
+int			params_size(t_instruct *instr)
 {
 	int	i;
 	int res;

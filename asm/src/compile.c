@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   compile.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 12:19:57 by trichert          #+#    #+#             */
-/*   Updated: 2018/03/21 19:05:12 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/28 11:22:23 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	write_instr(t_instruct *instr, char *buf, int *ibuf)
 	if (DBUG)
 		print_dbug(instr);
 	ft_memcpy(buf + *ibuf, &(instr->opcode), 1);
-		*ibuf += 1;
+	*ibuf += 1;
 	if (g_op_tab[instr->opcode].has_opc)
 	{
 		conf = get_opc(instr);
@@ -56,7 +56,7 @@ static char	wrt_file(int fd, t_champ *champ)
 {
 	char		*buf;
 	int			ibuf;
-	long int 	val;
+	long int	val;
 	int			fd_n_x;
 
 	val = COREWAR_EXEC_MAGIC;
@@ -71,11 +71,11 @@ static char	wrt_file(int fd, t_champ *champ)
 	ft_memcpy_rev(buf + ibuf, &val, 7);
 	ibuf += 8;
 	ft_putbuf_fd_np(fd, champ->comment, buf, &ibuf);
-	fd_n_x = (((COMMENT_LENGTH - ft_strlen(champ->comment)) + 4) << 16)| fd;
+	fd_n_x = (((COMMENT_LENGTH - ft_strlen(champ->comment)) + 4) << 16) | fd;
 	ft_putbuf_fd_loop_char_np(fd_n_x, '\0', buf, &ibuf);
 	write_prog(champ, buf, &ibuf);
 	write(fd, buf, ibuf);
-	close (fd);
+	close(fd);
 	free(buf);
 	return (SUCCESS);
 }
@@ -83,8 +83,8 @@ static char	wrt_file(int fd, t_champ *champ)
 char		compile(t_champ *champ, char *path)
 {
 	int		fd;
-	char 	*npath;
-	char 	*tmp;
+	char	*npath;
+	char	*tmp;
 
 	errno = 0;
 	if (!(tmp = ft_strndup(path, ft_strlen(path) - 2)))

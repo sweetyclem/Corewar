@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/04 13:48:32 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/21 18:08:19 by trichert         ###   ########.fr       */
+/*   Updated: 2018/03/28 11:10:07 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ void	*ft_memcpy_rev(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-
-
 
 /*
 **	ft_memcpy_p	->	libft/memory/ft_memcpy.c
