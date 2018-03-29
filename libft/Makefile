@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: clanier <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: trichert <trichert@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/07 05:41:01 by clanier           #+#    #+#              #
-#    Updated: 2017/02/03 12:54:02 by clanier          ###   ########.fr        #
+#    Updated: 2018/03/29 11:40:34 by trichert         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,14 @@ CFLAGS		=	-g -Wall -Wextra -Werror
 SRCS_DIR	=	./
 SRCS_LIST	=	ft_atoi.c \
 				ft_bzero.c \
+				ft_error.c 	\
 				ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isascii.c \
 				ft_isdigit.c \
 				ft_isprint.c \
 				ft_itoa.c \
+				ft_itoa2.c \
 				ft_memalloc.c \
 				ft_memccpy.c \
 				ft_memchr.c \
@@ -67,6 +69,7 @@ SRCS_LIST	=	ft_atoi.c \
 				ft_strstr.c \
 				ft_strsub.c \
 				ft_strtrim.c \
+				ft_strtrim_2.c \
 				ft_tolower.c \
 				ft_toupper.c \
 				ft_pow.c \
@@ -110,7 +113,23 @@ SRCS_LIST	=	ft_atoi.c \
 				ft_call_nbr_flags.c \
 				ft_call_str_flags.c \
 				ft_invalid_flags.c \
-				ft_nbrlen.c
+				ft_nbrlen.c	\
+				ft_scitoa.c 	\
+				ft_init_tabm.c \
+				ft_prtl.c \
+				prtl_cn0rrff.c \
+				prtl_llccssierror.c \
+				prtl_sfduee.c \
+				prtl_tl.c	\
+				ft_rm.c	\
+				ft_skip_whitespace.c	\
+				ft_str_isdigits.c	\
+				ft_strtrim.c		\
+				ft_open_file.c 		\
+				ft_rm.c 			\
+				ft_get_line.c
+
+
 SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_LIST))
 OBJS_DIR	=	./
 OBJS_LIST	=	$(patsubst %.c, %.o, $(SRCS_LIST))

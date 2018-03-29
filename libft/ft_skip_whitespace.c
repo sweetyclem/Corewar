@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_skip_whitespace.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 16:33:06 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/29 12:12:46 by trichert         ###   ########.fr       */
+/*   Created: 2018/03/26 16:36:23 by trichert          #+#    #+#             */
+/*   Updated: 2018/03/29 11:27:05 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			ft_strcmp(const char *s1, const char *s2)
-{
-	int i;
+#include "libft.h"
 
-	if (!s1 || !s2)
-		return (-1);
-	i = 0;
-	while (!(s1[i] ^ s2[i]))
-	{
-		if (s1[i] == '\0')
-			return (0);
-		++i;
-	}
-	return (s1[i] - s2[i]);
+char	*ft_skip_whitespace(char *str)
+{
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	return (str);
 }

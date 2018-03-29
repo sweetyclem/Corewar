@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_str_isdigits.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/05 16:33:06 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/29 12:12:46 by trichert         ###   ########.fr       */
+/*   Created: 2018/03/26 16:40:27 by trichert          #+#    #+#             */
+/*   Updated: 2018/03/29 11:30:11 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			ft_strcmp(const char *s1, const char *s2)
-{
-	int i;
+#include "libft.h"
 
-	if (!s1 || !s2)
-		return (-1);
+int		ft_str_is_digits(char *str)
+{
+	int	i;
+
 	i = 0;
-	while (!(s1[i] ^ s2[i]))
+	if (str[i] == '-')
+		i++;
+	while (str[i])
 	{
-		if (s1[i] == '\0')
+		if (!ft_isdigit(str[i]))
 			return (0);
-		++i;
+		i++;
 	}
-	return (s1[i] - s2[i]);
+	return (1);
 }

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clanier <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:32:31 by clanier           #+#    #+#             */
-/*   Updated: 2016/11/07 07:59:39 by clanier          ###   ########.fr       */
+/*   Updated: 2018/03/28 21:33:24 by trichert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <limits.h>
 #include "libft.h"
 
 static int	ft_number_len(int n)
@@ -70,5 +71,46 @@ char		*ft_itoa(int n)
 		return (NULL);
 	str[len] = '\0';
 	str = ft_tochar(str, n, len);
+	return (str);
+}
+
+static void		ft_comp_ldtoa(long int nb, char l, char *str)
+{
+	if (nb == LLONG_MIN)
+	{
+		str[l - 1] = '8';
+		ft_comp_ldtoa(nb / 10, l - 1, str);
+	}
+	else
+	{
+		if (nb < 0)
+		{
+			nb *= -1;
+			str[0] = '-';
+		}
+		if (nb > 9)
+			ft_comp_ldtoa(nb / 10, l - 1, str);
+		str[l - 1] = (nb % 10) + '0';
+	}
+}
+
+/*
+**	ft_ldtoa	-> libft/string/ft_itoa2.c
+**		convertie un long int en string
+*/
+
+char			*ft_ldtoa(long int n)
+{
+	char		l;
+	char		*str;
+	long int	nb;
+
+	nb = n;
+	l = (n < 0) ? 2 : 1;
+	while (n /= 10)
+		++l;
+	if (!(str = ft_strnew(l)))
+		return (NULL);
+	ft_comp_ldtoa(nb, l, str);
 	return (str);
 }

@@ -32,11 +32,9 @@ INCS 		= asm.h \
 
 INC = $(addprefix $(DIR_INC), $(INCS))
 
-DIR_LIBFT = ./libft/
-DIR_H_LIBFT = ./libft/includes
+DIR_LIBFT = ../libft/
+DIR_H_LIBFT = ../libft/includes
 LIBFT_A = ./libft/libft.a
-
-
 
 OBJDIR		= obj
 OBJ	= $(addprefix $(OBJDIR)/,$(SRC:.c=.o))
@@ -72,7 +70,7 @@ $(OBJDIR)/%.o: %.c
 	@$(CC) $(FLAGS) -c $< -o $@ -I $(DIR_INC) -I $(DIR_H_LIBFT)
 
 lib:
-	@make -C libft/
+	@make -C $(DIR_LIBFT)
 
 clean:
 	@$(RM) -rf $(OBJDIR)
