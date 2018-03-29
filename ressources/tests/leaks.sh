@@ -1,7 +1,6 @@
 #!/bin/bash
 
-make -C ../../asm
-cp ../../asm/asm .
+make -C ../../asm_srcs && cp ../../asm_srcs/asm .
 
 echo "\nUnknown instruction-------"
 valgrind ./asm ../champs/errors/unknown_instruction.s
