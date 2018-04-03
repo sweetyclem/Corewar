@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:33:30 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/29 11:23:19 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 11:31:10 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (NULL);
 }
 
-char		*ft_strjoin_np(char *s1, char *s2)
+char	*ft_strjoin_np(char *s1, char *s2)
 {
 	int		l;
 	int		i;

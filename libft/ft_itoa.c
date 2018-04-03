@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:32:31 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/28 21:33:24 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 11:29:00 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char		*ft_itoa(int n)
 	return (str);
 }
 
-static void		ft_comp_ldtoa(long int nb, char l, char *str)
+static void	ft_comp_ldtoa(long int nb, char l, char *str)
 {
 	if (nb == LLONG_MIN)
 	{
@@ -99,7 +99,7 @@ static void		ft_comp_ldtoa(long int nb, char l, char *str)
 **		convertie un long int en string
 */
 
-char			*ft_ldtoa(long int n)
+char		*ft_ldtoa(long int n)
 {
 	char		l;
 	char		*str;

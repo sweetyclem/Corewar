@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:33:14 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/28 21:51:33 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 11:29:49 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strdup(const char *s)
 **		les n premier char d'une chaine
 */
 
-char		*ft_strndup(const char *s1, int i)
+char	*ft_strndup(const char *s1, int i)
 {
 	char *s2;
 

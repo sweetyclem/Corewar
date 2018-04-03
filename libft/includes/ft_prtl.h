@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_prtl.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 13:53:47 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/28 21:30:30 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 11:32:01 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,6 @@ void					ft_init_tabm(t_pm_env *e);
 **		i -> écrit Error !!! : en rouge plus du texte
 **		C + r,g,y,b,m,c,w,0 -> couleur
 */
-void				ft_prtl(const char *s, va_list *ap, int fd);
+void					ft_prtl(const char *s, va_list *ap, int fd);
 
 #endif

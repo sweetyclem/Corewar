@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/05 16:33:36 by clanier           #+#    #+#             */
-/*   Updated: 2018/03/29 11:56:40 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 11:30:09 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	ft_strlen(const char *s)
 **		compte le nombre de char dans une string, no protected
 */
 
-int			ft_strlen_np(const char *s)
+int		ft_strlen_np(const char *s)
 {
 	int i;
 
