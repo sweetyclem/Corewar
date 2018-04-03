@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_rm.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: trichert <trichert@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cpirlot <cpirlot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/25 14:18:21 by apopinea          #+#    #+#             */
-/*   Updated: 2018/03/29 11:25:56 by trichert         ###   ########.fr       */
+/*   Updated: 2018/04/03 07:15:21 by cpirlot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ char		ft_rm(char *path)
 		return (ft_error_d(2, "RFLsn", FFL, "No path provided"));
 	if (stat(path, &file_stat) < 0)
 	{
-		return (ft_error_d(2, "RFLsssnEn", FI_, FU_, LI_,
-			"File : ", path, " ,does not exist", errno));
+		return (SUCCESS);
 	}
 	if (S_ISREG(file_stat.st_mode))
 		ft_rm_file(path);
